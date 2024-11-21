@@ -12,7 +12,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //==============================================================================
-constexpr LPCWSTR MainWindow_ClassName = L"MainWindow";
+constexpr LPCWSTR MainWindow_ClassName = L"xMainWindow";
 
 
 
@@ -22,6 +22,11 @@ constexpr LPCWSTR MainWindow_ClassName = L"MainWindow";
 //==============================================================================
 MainWindow::MainWindow()
 {
+	registerWindowClass();
+	createWindow();
+
+	ShowWindow(_hWnd, SW_SHOW);
+	UpdateWindow(_hWnd);
 }
 
 //==============================================================================
@@ -32,7 +37,7 @@ MainWindow::~MainWindow()
 //==============================================================================
 LRESULT MainWindow::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
-	return 0;
+	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
 //==============================================================================
@@ -66,7 +71,7 @@ void MainWindow::createWindow(void)
 	HWND hWnd;
 
 
-	hWnd = ::CreateWindowExW(
+	_hWnd = ::CreateWindowExW(
 		dwExStyle,
 		lpszClassName,
 		lpWindowName,

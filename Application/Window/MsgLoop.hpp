@@ -8,21 +8,21 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //==============================================================================
-class WindowMsgLoop
+class MsgLoop
 {
 public:
-	WindowMsgLoop();
-	virtual ~WindowMsgLoop();
+	MsgLoop();
+	virtual ~MsgLoop();
 
 public:
-	WindowMsgLoop(const WindowMsgLoop&) = delete;
-	WindowMsgLoop& operator=(const WindowMsgLoop&) = delete;
+	MsgLoop(const MsgLoop&) = delete;
+	MsgLoop& operator=(const MsgLoop&) = delete;
 
-	WindowMsgLoop(WindowMsgLoop&&) = delete;
-	WindowMsgLoop& operator=(WindowMsgLoop&&) = delete;
+	MsgLoop(MsgLoop&&) = delete;
+	MsgLoop& operator=(MsgLoop&&) = delete;
 
 public:
-	virtual void run(void);
+	virtual void runMsgLoop(void);
 };
 
 

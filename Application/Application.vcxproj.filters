@@ -30,7 +30,7 @@
     <ClInclude Include="Window\WindowClass.hpp">
       <Filter>Root\Window</Filter>
     </ClInclude>
-    <ClInclude Include="Window\WindowMsgLoop.hpp">
+    <ClInclude Include="Window\MsgLoop.hpp">
       <Filter>Root\Window</Filter>
     </ClInclude>
     <ClInclude Include="AppWindow\MainWindow.hpp">
@@ -56,7 +56,7 @@
     <ClCompile Include="Window\WindowClass.cpp">
       <Filter>Root\Window</Filter>
     </ClCompile>
-    <ClCompile Include="Window\WindowMsgLoop.cpp">
+    <ClCompile Include="Window\MsgLoop.cpp">
       <Filter>Root\Window</Filter>
     </ClCompile>
     <ClCompile Include="AppWindow\MainWindow.cpp">

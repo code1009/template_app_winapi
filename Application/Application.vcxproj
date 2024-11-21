@@ -143,7 +143,7 @@
     <ClInclude Include="Window\pch.hpp" />
     <ClInclude Include="Window\Window.hpp" />
     <ClInclude Include="Window\WindowClass.hpp" />
-    <ClInclude Include="Window\WindowMsgLoop.hpp" />
+    <ClInclude Include="Window\MsgLoop.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AppWindow\MainWindow.cpp" />
@@ -157,7 +157,7 @@
     <ClCompile Include="Window\Application.cpp" />
     <ClCompile Include="Window\Window.cpp" />
     <ClCompile Include="Window\WindowClass.cpp" />
-    <ClCompile Include="Window\WindowMsgLoop.cpp" />
+    <ClCompile Include="Window\MsgLoop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resource\Application.ico" />

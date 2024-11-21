@@ -10,7 +10,9 @@
 //==============================================================================
 class WindowClass
 {
-	WNDCLASSEXW _WindowClass{ };
+private:
+	WNDCLASSEXW _WndClass{ };
+	std::wstring _ClassName;
 
 public:
 	WindowClass();

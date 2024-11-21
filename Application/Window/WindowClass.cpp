@@ -25,20 +25,24 @@ WindowClass::~WindowClass()
 void WindowClass::registerWindowClass(LPCWSTR className, UINT iconId)
 {
 	//--------------------------------------------------------------------------
-	memset(&_WindowClass, 0, sizeof(_WindowClass));
+	_ClassName = className;
 
-	_WindowClass.cbSize = sizeof(_WindowClass);
-	_WindowClass.style = CS_HREDRAW | CS_VREDRAW;
-	_WindowClass.cbClsExtra = 0;
-	_WindowClass.cbWndExtra = 0;
-	_WindowClass.hInstance = ApplicationGet()->_hInstance;
-	_WindowClass.lpfnWndProc = WindowProc;
-	_WindowClass.lpszClassName = className;
-	_WindowClass.lpszMenuName = nullptr;
-	_WindowClass.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
-	_WindowClass.hCursor = ::LoadCursorW(nullptr, MAKEINTRESOURCEW(32512)); // getInstance()->loadCursor(32512); IDC_ARROW;
-	_WindowClass.hIcon = nullptr;
-	_WindowClass.hIconSm = nullptr;
+
+	//--------------------------------------------------------------------------
+	memset(&_WndClass, 0, sizeof(_WndClass));
+
+	_WndClass.cbSize = sizeof(_WndClass);
+	_WndClass.style = CS_HREDRAW | CS_VREDRAW;
+	_WndClass.cbClsExtra = 0;
+	_WndClass.cbWndExtra = 0;
+	_WndClass.hInstance = ApplicationGet()->_hInstance;
+	_WndClass.lpfnWndProc = WindowProc;
+	_WndClass.lpszClassName = _ClassName.c_str();
+	_WndClass.lpszMenuName = nullptr;
+	_WndClass.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
+	_WndClass.hCursor = ::LoadCursorW(nullptr, MAKEINTRESOURCEW(32512)); // getInstance()->loadCursor(32512); IDC_ARROW;
+	_WndClass.hIcon = nullptr;
+	_WndClass.hIconSm = nullptr;
 
 
 
@@ -50,7 +54,7 @@ void WindowClass::registerWindowClass(LPCWSTR className, UINT iconId)
 	rv = ::GetClassInfoExW(ApplicationGet()->_hInstance, className, &wndClass);
 	if (FALSE == rv)
 	{
-		ATOM atom = ::RegisterClassExW(&_WindowClass);
+		ATOM atom = ::RegisterClassExW(&_WndClass);
 		if (!atom)
 		{
 			throw std::runtime_error("WindowClass::registerWindowClass()");

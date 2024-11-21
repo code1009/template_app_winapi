@@ -11,7 +11,7 @@
 #include "Window/Application.hpp"
 #include "Window/WindowClass.hpp"
 #include "Window/Window.hpp"
-#include "Window/WindowMsgLoop.hpp"
+#include "Window/MsgLoop.hpp"
 
 #include "AppWindow/MainWindow.hpp"
 
@@ -27,10 +27,10 @@ void RunWindow()
 
 
 
-	WindowMsgLoop windowMsgLoop;
+	MsgLoop msgLoop;
 
 
-	windowMsgLoop.run();
+	msgLoop.runMsgLoop();
 }
 
 
