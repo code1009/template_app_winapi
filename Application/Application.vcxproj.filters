@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="root">
+      <UniqueIdentifier>{93a318b1-0c16-43cf-80db-4ae27bd032a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\Resource">
+      <UniqueIdentifier>{f9d13b16-ce60-4e26-a989-43df8d533057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\mwa">
+      <UniqueIdentifier>{1940530d-2442-4918-acdb-4306675b637d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\mwa\ref">
+      <UniqueIdentifier>{fbec4846-7b0b-45f9-8230-6618d67fc320}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\Window">
+      <UniqueIdentifier>{601e49c9-9e1f-4051-8450-dca389fceb9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="root\Widget">
+      <UniqueIdentifier>{8804edcf-4fea-4ba1-8f73-a8e6ab9c2d6d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.hpp">
+      <Filter>root</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Resource.h">
+      <Filter>root\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>root</Filter>
+    </ClInclude>
+    <ClInclude Include="mwa\Application.hpp">
+      <Filter>root\mwa</Filter>
+    </ClInclude>
+    <ClInclude Include="mwa\dx2d.hpp">
+      <Filter>root\mwa</Filter>
+    </ClInclude>
+    <ClInclude Include="mwa\MsgLoop.hpp">
+      <Filter>root\mwa</Filter>
+    </ClInclude>
+    <ClInclude Include="mwa\pch.hpp">
+      <Filter>root\mwa</Filter>
+    </ClInclude>
+    <ClInclude Include="mwa\RuntimeDebug.hpp">
+      <Filter>root\mwa</Filter>
+    </ClInclude>
+    <ClInclude Include="mwa\Splitter.hpp">
+      <Filter>root\mwa</Filter>
+    </ClInclude>
+    <ClInclude Include="mwa\Window.hpp">
+      <Filter>root\mwa</Filter>
+    </ClInclude>
+    <ClInclude Include="mwa\WindowClass.hpp">
+      <Filter>root\mwa</Filter>
+    </ClInclude>
+    <ClInclude Include="mwa\Function.hpp">
+      <Filter>root\mwa</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\AboutBox.hpp">
+      <Filter>root\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\LogView.hpp">
+      <Filter>root\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\MainFrame.hpp">
+      <Filter>root\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\pch.hpp">
+      <Filter>root\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\PropertyBox.hpp">
+      <Filter>root\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\View.hpp">
+      <Filter>root\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\WidgetTool.hpp">
+      <Filter>root\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\WidgetView.hpp">
+      <Filter>root\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\view_window.hpp">
+      <Filter>root\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget\pch.hpp">
+      <Filter>root\Widget</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>root</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>root</Filter>
+    </ClCompile>
+    <ClCompile Include="mwa\Application.cpp">
+      <Filter>root\mwa</Filter>
+    </ClCompile>
+    <ClCompile Include="mwa\dx2d.cpp">
+      <Filter>root\mwa</Filter>
+    </ClCompile>
+    <ClCompile Include="mwa\MsgLoop.cpp">
+      <Filter>root\mwa</Filter>
+    </ClCompile>
+    <ClCompile Include="mwa\RuntimeDebug.cpp">
+      <Filter>root\mwa</Filter>
+    </ClCompile>
+    <ClCompile Include="mwa\Splitter.cpp">
+      <Filter>root\mwa</Filter>
+    </ClCompile>
+    <ClCompile Include="mwa\Window.cpp">
+      <Filter>root\mwa</Filter>
+    </ClCompile>
+    <ClCompile Include="mwa\WindowClass.cpp">
+      <Filter>root\mwa</Filter>
+    </ClCompile>
+    <ClCompile Include="mwa\Function.cpp">
+      <Filter>root\mwa</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\AboutBox.cpp">
+      <Filter>root\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\LogView.cpp">
+      <Filter>root\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\MainFrame.cpp">
+      <Filter>root\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\PropertyBox.cpp">
+      <Filter>root\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\View.cpp">
+      <Filter>root\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\WidgetTool.cpp">
+      <Filter>root\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\WidgetView.cpp">
+      <Filter>root\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget\view_window.cpp">
+      <Filter>root\Widget</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\Application.ico">
+      <Filter>root\Resource</Filter>
+    </Image>
+    <Image Include="Resource\small.ico">
+      <Filter>root\Resource</Filter>
+    </Image>
+    <Image Include="Resource\tool.ico">
+      <Filter>root\Resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource\Application.rc">
+      <Filter>root\Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="Resource\Application.manifest">
+      <Filter>root\Resource</Filter>
+    </Manifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="mwa\template_targetver.h.txt">
+      <Filter>root\mwa\ref</Filter>
+    </Text>
+    <Text Include="mwa\template_pch.cpp.txt">
+      <Filter>root\mwa\ref</Filter>
+    </Text>
+    <Text Include="mwa\template_pch.hpp.txt">
+      <Filter>root\mwa\ref</Filter>
+    </Text>
+    <Text Include="mwa\Application.txt">
+      <Filter>root\mwa\ref</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
