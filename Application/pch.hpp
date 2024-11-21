@@ -46,7 +46,12 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //==============================================================================
+#include <cstdint>
+#include <cstddef>
+#include <stdexcept>
+
 #include <iostream>
+
 #include <string>
 #include <vector>
 #include <map>

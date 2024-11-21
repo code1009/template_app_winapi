@@ -18,11 +18,11 @@ public:
 	virtual ~Window();
 
 public:
-	virtual void registerWindowClass(void);
+	Window(const Window&) = delete;
+	Window& operator=(const Window&) = delete;
 
-public:
-	virtual void createWindow(void);
-	virtual void destroyWindow(void);
+	Window(Window&&) = delete;
+	Window& operator=(Window&&) = delete;
 
 public:
 	virtual LRESULT onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
@@ -32,3 +32,7 @@ public:
 
 
 
+////////////////////////////////////////////////////////////////////////////////
+//==============================================================================
+LRESULT __stdcall WindowProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+LRESULT __stdcall WindowDialogProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
