@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Root">
+      <UniqueIdentifier>{93a318b1-0c16-43cf-80db-4ae27bd032a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Root\Resource">
+      <UniqueIdentifier>{f9d13b16-ce60-4e26-a989-43df8d533057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Root\Window">
+      <UniqueIdentifier>{ddaea3fa-9f18-45ed-bff0-cc4e242bbb65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Root\AppWindow">
+      <UniqueIdentifier>{601e49c9-9e1f-4051-8450-dca389fceb9d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.hpp">
+      <Filter>Root</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Resource.h">
+      <Filter>Root\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\pch.hpp">
+      <Filter>Root\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\Window.hpp">
+      <Filter>Root\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\WindowClass.hpp">
+      <Filter>Root\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\WindowMsgLoop.hpp">
+      <Filter>Root\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="AppWindow\MainWindow.hpp">
+      <Filter>Root\AppWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\Application.hpp">
+      <Filter>Root\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="AppWindow\pch.hpp">
+      <Filter>Root\AppWindow</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <Filter>Root</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Root</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\Window.cpp">
+      <Filter>Root\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\WindowClass.cpp">
+      <Filter>Root\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\WindowMsgLoop.cpp">
+      <Filter>Root\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="AppWindow\MainWindow.cpp">
+      <Filter>Root\AppWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\Application.cpp">
+      <Filter>Root\Window</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\Application.ico">
+      <Filter>Root\Resource</Filter>
+    </Image>
+    <Image Include="Resource\small.ico">
+      <Filter>Root\Resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource\Application.rc">
+      <Filter>Root\Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Window\Application.txt">
+      <Filter>Root\Window</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
