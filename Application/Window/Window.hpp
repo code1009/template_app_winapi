@@ -36,3 +36,4 @@ public:
 //==============================================================================
 LRESULT __stdcall WindowProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 LRESULT __stdcall WindowDialogProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+

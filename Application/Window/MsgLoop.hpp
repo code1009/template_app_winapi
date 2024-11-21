@@ -23,6 +23,7 @@ public:
 
 public:
 	virtual void runMsgLoop(void);
+	virtual void onIdle(void);
 };
 
 

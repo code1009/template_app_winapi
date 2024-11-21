@@ -42,6 +42,9 @@
     <ClInclude Include="AppWindow\pch.hpp">
       <Filter>Root\AppWindow</Filter>
     </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Root</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

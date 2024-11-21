@@ -34,5 +34,14 @@ void MsgLoop::runMsgLoop(void)
 			::TranslateMessage(&msg);
 			::DispatchMessageW(&msg);
 		}
+		else
+		{
+			onIdle();
+		}
 	} while (msg.message != WM_QUIT);
+}
+
+void MsgLoop::onIdle(void)
+{
+	
 }

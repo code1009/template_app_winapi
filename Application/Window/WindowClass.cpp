@@ -22,7 +22,7 @@ WindowClass::~WindowClass()
 }
 
 //==============================================================================
-void WindowClass::registerWindowClass(LPCWSTR className, UINT iconId)
+void WindowClass::registerWindowClass(LPCWSTR className, UINT id)
 {
 	//--------------------------------------------------------------------------
 	_ClassName = className;
@@ -32,6 +32,7 @@ void WindowClass::registerWindowClass(LPCWSTR className, UINT iconId)
 	memset(&_WndClass, 0, sizeof(_WndClass));
 
 	_WndClass.cbSize = sizeof(_WndClass);
+	//_WndClass.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS
 	_WndClass.style = CS_HREDRAW | CS_VREDRAW;
 	_WndClass.cbClsExtra = 0;
 	_WndClass.cbWndExtra = 0;
@@ -40,9 +41,9 @@ void WindowClass::registerWindowClass(LPCWSTR className, UINT iconId)
 	_WndClass.lpszClassName = _ClassName.c_str();
 	_WndClass.lpszMenuName = nullptr;
 	_WndClass.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
-	_WndClass.hCursor = ::LoadCursorW(nullptr, MAKEINTRESOURCEW(32512)); // getInstance()->loadCursor(32512); IDC_ARROW;
-	_WndClass.hIcon = nullptr;
-	_WndClass.hIconSm = nullptr;
+	_WndClass.hCursor = ::LoadCursorW(nullptr, MAKEINTRESOURCEW(32512)); // IDC_ARROW;
+	_WndClass.hIcon = LoadIcon(ApplicationGet()->_hInstance, MAKEINTRESOURCEW(id));
+	_WndClass.hIconSm = LoadIcon(ApplicationGet()->_hInstance, MAKEINTRESOURCEW(id));
 
 
 
@@ -64,5 +65,12 @@ void WindowClass::registerWindowClass(LPCWSTR className, UINT iconId)
 
 void WindowClass::unregisterWindowClass(void)
 {
+	BOOL rv;
 
+
+	rv = ::UnregisterClassW(_ClassName.c_str(), ApplicationGet()->_hInstance);
+	if (FALSE == rv)
+	{
+		throw std::runtime_error("WindowClass::unregisterWindowClass()");
+	}
 }

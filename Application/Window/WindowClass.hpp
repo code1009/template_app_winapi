@@ -26,7 +26,7 @@ public:
 	WindowClass& operator=(WindowClass&&) = delete;
 
 public:
-	void registerWindowClass(LPCWSTR className, UINT iconId);
+	void registerWindowClass(LPCWSTR className, UINT id);
 	void unregisterWindowClass(void);
 };
 
