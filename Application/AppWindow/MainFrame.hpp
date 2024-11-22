@@ -13,7 +13,7 @@ class VSplitter
 {
 public:
 	const int _Width{ 4 };
-	double _percent = 0.5;
+	double _percent = 0.8;
 	int _oldposx;
 
 public:
@@ -23,7 +23,8 @@ public:
 		if (hdc)
 		{
 			//const HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 0));
-			const HBRUSH hBrush = CreateSolidBrush(RGB(128, 128, 255));
+			const HBRUSH hBrush = CreateSolidBrush(RGB(248, 248, 248));
+			const HPEN hPen= CreatePen(PS_SOLID, 1, RGB(248, 248, 248));
 			if (hBrush)
 			{
 				RECT rect;
@@ -36,10 +37,17 @@ public:
 
 				//SetROP2(hdc, R2_NOT);
 				//SetBkMode(hdc, TRANSPARENT);
+
 				const HGDIOBJ hOldBrush = SelectObject(hdc, hBrush);
+				const HGDIOBJ hOldPen = SelectObject(hdc, hPen);
+
 				Rectangle(hdc, rectSplit.left, rectSplit.top, rectSplit.right, rectSplit.bottom);
+				
 				SelectObject(hdc, hOldBrush);
+				SelectObject(hdc, hOldPen);
+
 				DeleteObject(hBrush);
+				DeleteObject(hPen);
 			}
 			ReleaseDC(hWnd, hdc);
 		}

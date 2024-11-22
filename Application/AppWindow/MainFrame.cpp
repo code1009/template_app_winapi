@@ -237,6 +237,25 @@ LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 	::TextOutW(hdc, 0, 0, L"MainFrame", 9);
 	::SetBkMode(hdc, bkMode);
 
+
+	const HBRUSH hBrush = CreateSolidBrush(RGB(128, 128, 255));
+	const HPEN hPen = CreatePen(PS_SOLID, 1, RGB(128, 128, 255));
+
+	RECT rect;
+	GetClientRect(hWnd, &rect);
+
+	const HGDIOBJ hOldBrush = SelectObject(hdc, hBrush);
+	const HGDIOBJ hOldPen = SelectObject(hdc, hPen);
+
+	Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+
+	SelectObject(hdc, hOldBrush);
+	SelectObject(hdc, hOldPen);
+
+	DeleteObject(hBrush);
+	DeleteObject(hPen);
+
+
 	::EndPaint(hWnd, &ps);
 
 
