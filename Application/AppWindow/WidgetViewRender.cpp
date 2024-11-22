@@ -6,7 +6,7 @@
 #include "../Window/Window.hpp"
 #include "../Window/Direct2D.hpp"
 #include "../Resource/Resource.h"
-#include "ViewRender.hpp"
+#include "WidgetViewRender.hpp"
 
 
 
@@ -14,18 +14,19 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-ViewRender::ViewRender()
+WidgetViewRender::WidgetViewRender()
 {
 	_lastTime = std::chrono::steady_clock::now();
 }
 
-ViewRender::~ViewRender()
+//===========================================================================
+WidgetViewRender::~WidgetViewRender()
 {
 	destroyDeviceResources();
 }
 
 //===========================================================================
-bool ViewRender::createDeviceResources(HWND hWnd)
+bool WidgetViewRender::createDeviceResources(HWND hWnd)
 {
 	//-----------------------------------------------------------------------
 	if (!Direct2D::createDeviceResources(hWnd))
@@ -107,7 +108,7 @@ bool ViewRender::createDeviceResources(HWND hWnd)
 	return true;
 }
 
-void ViewRender::destroyDeviceResources(void)
+void WidgetViewRender::destroyDeviceResources(void)
 {
 	//-----------------------------------------------------------------------
 	if (_pLightSlateGrayBrush)
@@ -141,7 +142,7 @@ void ViewRender::destroyDeviceResources(void)
 	Direct2D::destroyDeviceResources();
 }
 
-void ViewRender::calculateFPS(void)
+void WidgetViewRender::calculateFPS(void)
 {
 	auto currentTime = std::chrono::steady_clock::now();
 	std::chrono::duration<float> elapsed = currentTime - _lastTime;
@@ -156,7 +157,7 @@ void ViewRender::calculateFPS(void)
 	}
 }
 
-void ViewRender::on_render(void)
+void WidgetViewRender::on_render(void)
 {
 	calculateFPS();
 
@@ -166,14 +167,16 @@ void ViewRender::on_render(void)
 	drawStatus();
 }
 
-void ViewRender::drawStatus(void)
+void WidgetViewRender::drawStatus(void)
 {
+	//-----------------------------------------------------------------------
 	SYSTEMTIME st;
 
 
 	GetLocalTime(&st);
 
 
+	//-----------------------------------------------------------------------
 	wchar_t timeText[256];
 
 
@@ -185,6 +188,7 @@ void ViewRender::drawStatus(void)
 	);
 
 
+	//-----------------------------------------------------------------------
 	wchar_t frameText[256];
 
 
@@ -193,6 +197,7 @@ void ViewRender::drawStatus(void)
 	);
 
 
+	//-----------------------------------------------------------------------
 	wchar_t fpsText[256];
 
 
@@ -201,7 +206,7 @@ void ViewRender::drawStatus(void)
 	);
 
 
-
+	//-----------------------------------------------------------------------
 	std::wstring text;
 
 
@@ -219,13 +224,14 @@ void ViewRender::drawStatus(void)
 	);
 }
 
-void ViewRender::drawContents(void)
+void WidgetViewRender::drawContents(void)
 {
 	float zoom = 1;
 
 
 	D2D1_SIZE_F rtSize = _pRenderTarget->GetSize();
-	float width = rtSize.width;
+
+	float width  = rtSize.width;
 	float height = rtSize.height;
 
 

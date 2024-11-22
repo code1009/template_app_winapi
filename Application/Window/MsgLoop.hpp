@@ -15,6 +15,8 @@ private:
 
 public:
 	MsgLoop();
+
+public:
 	virtual ~MsgLoop();
 
 public:
@@ -31,6 +33,7 @@ public:
 	virtual void runMsgLoop(void);
 	virtual void onIdle(void);
 };
+
 
 
 

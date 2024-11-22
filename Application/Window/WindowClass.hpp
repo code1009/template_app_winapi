@@ -16,6 +16,8 @@ private:
 
 public:
 	WindowClass();
+
+public:
 	virtual ~WindowClass();
 
 public:
@@ -34,7 +36,6 @@ public:
 	);
 	void unregisterWindowClass(void);
 };
-
 
 
 

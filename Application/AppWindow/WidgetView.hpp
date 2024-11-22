@@ -8,23 +8,22 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-class MainFrame : public Window
+class WidgetView : public Window
 {
 public:
-	std::unique_ptr<WidgetView> _WidgetView;
-	std::unique_ptr<LogView> _LogView;
+	std::unique_ptr<WidgetViewRender> _Render;
 
 public:
-	MainFrame();
+	explicit WidgetView(HWND hWndParent);
 
 public:
-	virtual ~MainFrame();
+	virtual ~WidgetView();
 
 public:
 	virtual LRESULT onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam) override;
 
 public:
-	void createWindow(void);
+	void createWindow(HWND hWndParent);
 	void destroyWindow(void);
 
 public:
@@ -35,8 +34,6 @@ public:
 	LRESULT onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	void onCommand_App_About(void);
-	void onCommand_App_Exit(void);
 
 public:
 	void onIdle(void);

@@ -12,6 +12,8 @@ class AboutBox : public Window
 {
 public:
 	AboutBox();
+
+public:
 	virtual ~AboutBox();
 
 public:

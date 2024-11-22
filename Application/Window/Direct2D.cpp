@@ -95,9 +95,11 @@ bool Direct2D::createDeviceResources(HWND hWnd)
 		//-------------------------------------------------------------------
 		RECT rect;
 
+
 		GetClientRect(hWnd, &rect);
 
 
+		//-------------------------------------------------------------------
 		D2D1_SIZE_U size = D2D1::SizeU(
 			rect.right - rect.left,
 			rect.bottom - rect.top
@@ -110,8 +112,6 @@ bool Direct2D::createDeviceResources(HWND hWnd)
 			D2D1::HwndRenderTargetProperties(hWnd, size),
 			&_pRenderTarget
 		);
-
-
 		if (FAILED(hr))
 		{
 			return false;
@@ -138,7 +138,6 @@ void Direct2D::resize(HWND hWnd, UINT width, UINT height)
 		// Note: This method can fail, but it's okay to ignore the
 		// error here, because the error will be returned again
 		// the next time EndDraw is called.
-
 		_pRenderTarget->Resize(D2D1::SizeU(width, height));
 	}
 }
@@ -157,7 +156,6 @@ void Direct2D::render(HWND hWnd)
 
 		hr = _pRenderTarget->EndDraw();
 	}
-
 	if (hr == D2DERR_RECREATE_TARGET)
 	{
 		destroyDeviceResources();
@@ -167,3 +165,7 @@ void Direct2D::render(HWND hWnd)
 void Direct2D::on_render(void)
 {
 }
+
+
+
+

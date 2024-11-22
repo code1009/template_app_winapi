@@ -11,10 +11,9 @@
 class View : public Window
 {
 public:
-	std::unique_ptr<ViewRender> _ViewRender;
+	explicit View(HWND hWndParent);
 
 public:
-	explicit View(HWND hWndParent);
 	virtual ~View();
 
 public:
@@ -33,9 +32,6 @@ public:
 	LRESULT onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	void onCommand_App_About(void);
-
-public:
-	void onIdle(void);
 };
 
 

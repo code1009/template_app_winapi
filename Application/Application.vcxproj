@@ -140,7 +140,8 @@
     <ClInclude Include="AppWindow\MainFrame.hpp" />
     <ClInclude Include="AppWindow\pch.hpp" />
     <ClInclude Include="AppWindow\View.hpp" />
-    <ClInclude Include="AppWindow\ViewRender.hpp" />
+    <ClInclude Include="AppWindow\WidgetView.hpp" />
+    <ClInclude Include="AppWindow\WidgetViewRender.hpp" />
     <ClInclude Include="pch.hpp" />
     <ClInclude Include="Resource\Resource.h" />
     <ClInclude Include="targetver.h" />
@@ -156,7 +157,8 @@
     <ClCompile Include="AppWindow\LogView.cpp" />
     <ClCompile Include="AppWindow\MainFrame.cpp" />
     <ClCompile Include="AppWindow\View.cpp" />
-    <ClCompile Include="AppWindow\ViewRender.cpp" />
+    <ClCompile Include="AppWindow\WidgetView.cpp" />
+    <ClCompile Include="AppWindow\WidgetViewRender.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

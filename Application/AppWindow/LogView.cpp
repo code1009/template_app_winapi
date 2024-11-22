@@ -6,7 +6,6 @@
 #include "../Window/Window.hpp"
 #include "../Window/Direct2D.hpp"
 #include "../Resource/Resource.h"
-#include "ViewRender.hpp"
 #include "LogView.hpp"
 
 
@@ -36,6 +35,8 @@ LRESULT LogListViewCtrl::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM l
 	case WM_CLOSE:      return onClose     (hWnd, uMsg, wParam, lParam);
 	case WM_SIZE:       return onSize      (hWnd, uMsg, wParam, lParam);
 	case WM_ERASEBKGND: return onEraseBkGnd(hWnd, uMsg, wParam, lParam);
+	case WM_PAINT:      return onPaint     (hWnd, uMsg, wParam, lParam);
+	case WM_COMMAND:    return onCommand   (hWnd, uMsg, wParam, lParam);
 	default:
 		break;
 	}
@@ -47,7 +48,6 @@ LRESULT LogListViewCtrl::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM l
 void LogListViewCtrl::createWindow(HWND hWndParent)
 {
 	//-----------------------------------------------------------------------
-	//HWND    hWndParent    = nullptr;
 	LPCWSTR lpszClassName = WC_LISTVIEW;
 	LPCWSTR lpWindowName  = L"Window";
 	DWORD   dwStyle       = WS_CHILD | WS_VISIBLE;
@@ -162,6 +162,16 @@ LRESULT LogListViewCtrl::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, L
 	return ::CallWindowProcW(_ListViewWindowProc, hWnd, uMsg, wParam, lParam);
 }
 
+LRESULT LogListViewCtrl::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	return ::CallWindowProcW(_ListViewWindowProc, hWnd, uMsg, wParam, lParam);
+}
+
+LRESULT LogListViewCtrl::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	return ::CallWindowProcW(_ListViewWindowProc, hWnd, uMsg, wParam, lParam);
+}
+
 //===========================================================================
 void LogListViewCtrl::initialize(void)
 {
@@ -195,32 +205,31 @@ void LogListViewCtrl::initializeColumn(void)
 		ListView_InsertColumn(_hWnd, col, &lvc[col]);
 	}
 }
+
 void LogListViewCtrl::initializeItems(void)
 {
 	//-----------------------------------------------------------------------
-	std::wstring text;
-
-
-	text = L"Hello";
-
-
-	//-----------------------------------------------------------------------
 	LVITEMW lvi = {};
-
-
-	lvi.mask = LVIF_TEXT; // LVIF_IMAGE;
-	lvi.iSubItem = 0;
 	int i;
+	std::wstring text;
 
 
 	for (i = 0; i < 100; i++)
 	{
+		text = std::to_wstring(i);
+		lvi.mask = LVIF_TEXT | LVIF_COLUMNS; // LVIF_IMAGE;
 		lvi.iItem = i;
+		lvi.iSubItem = 0;
 		lvi.iImage = 0;
 		lvi.pszText = const_cast<LPWSTR>(text.c_str());
 		lvi.cchTextMax = static_cast<int>(text.size());
-
 		ListView_InsertItem(_hWnd, &lvi);
+
+		text = L"Hello";
+		ListView_SetItemText(_hWnd, i, 1, const_cast<LPWSTR>(text.c_str()));
+		ListView_SetItemText(_hWnd, i, 2, const_cast<LPWSTR>(text.c_str()));
+		ListView_SetItemText(_hWnd, i, 3, const_cast<LPWSTR>(text.c_str()));
+		ListView_SetItemText(_hWnd, i, 4, const_cast<LPWSTR>(text.c_str()));
 	}
 }
 
@@ -319,7 +328,6 @@ void LogView::createWindow(HWND hWndParent)
 		ApplicationGet()->_hInstance,
 		this
 	);
-
 	if (nullptr==hWnd)
 	{
 		throw std::runtime_error("LogView::createWindow() failed");

@@ -7,8 +7,8 @@
 #include "../Window/Direct2D.hpp"
 #include "../Resource/Resource.h"
 
-#include "ViewRender.hpp"
-#include "View.hpp"
+#include "WidgetViewRender.hpp"
+#include "WidgetView.hpp"
 #include "LogView.hpp"
 #include "MainFrame.hpp"
 #include "AboutBox.hpp"
@@ -45,7 +45,7 @@ MainFrame::MainFrame()
 
 
 	//-----------------------------------------------------------------------
-	_View = std::make_unique<View>(_hWnd);
+	_WidgetView = std::make_unique<WidgetView>(_hWnd);
 	_LogView = std::make_unique<LogView>(_hWnd);
 
 
@@ -111,7 +111,6 @@ void MainFrame::createWindow(void)
 		ApplicationGet()->_hInstance,
 		this
 	);
-
 	if (nullptr==hWnd)
 	{
 		throw std::runtime_error("MainFrame::createWindow() failed");
@@ -124,7 +123,6 @@ void MainFrame::destroyWindow(void)
 	{
 		::DestroyWindow(_hWnd);
 	}
-
 	_hWnd = nullptr;
 }
 
@@ -174,20 +172,20 @@ LRESULT MainFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 
 
 	//-----------------------------------------------------------------------
-	if (_View.get() && _LogView.get())
+	if (_WidgetView.get() && _LogView.get())
 	{
 		constexpr int logViewHeight = 200;
 
 
 		if (cy > logViewHeight)
 		{
-			::MoveWindow(_View->_hWnd, 0, 0, cx, cy - logViewHeight, TRUE);
+			::MoveWindow(_WidgetView->_hWnd, 0, 0, cx, cy - logViewHeight, TRUE);
 
 			::MoveWindow(_LogView->_hWnd, 0, cy - logViewHeight, cx, logViewHeight, TRUE);
 		}
 		else
 		{
-			::MoveWindow(_View->_hWnd, 0, 0, 0, 0, TRUE);
+			::MoveWindow(_WidgetView->_hWnd, 0, 0, 0, 0, TRUE);
 
 			::MoveWindow(_LogView->_hWnd, 0, 0, cx, cy, TRUE);
 		}
@@ -242,9 +240,9 @@ LRESULT MainFrame::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPa
 		return 0;
 
 	default:
-		if (_View.get())
+		if (_WidgetView.get())
 		{
-			return ::SendMessage(_View->_hWnd, uMsg, wParam, lParam);
+			return ::SendMessage(_WidgetView->_hWnd, uMsg, wParam, lParam);
 		}
 		break;
 	}
@@ -285,11 +283,8 @@ void MainFrame::onCommand_App_Exit(void)
 //===========================================================================
 void MainFrame::onIdle(void)
 {
-	//OutputDebugStringW(L"MainFrame::onIdle()\r\n");
-	//Sleep(10);
-
-	if (_View.get())
+	if (_WidgetView.get())
 	{
-		_View->onIdle();
+		_WidgetView->onIdle();
 	}
 }

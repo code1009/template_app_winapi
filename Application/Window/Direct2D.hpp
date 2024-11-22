@@ -23,6 +23,8 @@ public:
 
 public:
 	Direct2D();
+
+public:
 	virtual ~Direct2D();
 
 public:
@@ -41,3 +43,7 @@ public:
 	virtual void render(HWND hWnd);
 	virtual void on_render(void);
 };
+
+
+
+

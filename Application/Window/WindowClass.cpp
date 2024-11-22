@@ -79,3 +79,7 @@ void WindowClass::unregisterWindowClass(void)
 		throw std::runtime_error("WindowClass::unregisterWindowClass()");
 	}
 }
+
+
+
+

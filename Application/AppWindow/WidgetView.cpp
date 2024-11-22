@@ -6,7 +6,8 @@
 #include "../Window/Window.hpp"
 #include "../Window/Direct2D.hpp"
 #include "../Resource/Resource.h"
-#include "View.hpp"
+#include "WidgetViewRender.hpp"
+#include "WidgetView.hpp"
 
 
 
@@ -14,7 +15,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-constexpr LPCWSTR View_ClassName = L"xView";
+constexpr LPCWSTR WidgetView_ClassName = L"xWidgetView";
 
 
 
@@ -22,15 +23,19 @@ constexpr LPCWSTR View_ClassName = L"xView";
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-View::View(HWND hWndParent)
+WidgetView::WidgetView(HWND hWndParent)
 {
 	//-----------------------------------------------------------------------
 	WindowClass windowClass;
 
 
 	windowClass.registerWindowClass(
-		View_ClassName
+		WidgetView_ClassName
 	);
+
+
+	//-----------------------------------------------------------------------
+	_Render = std::make_unique<WidgetViewRender>();
 
 
 	//-----------------------------------------------------------------------
@@ -43,12 +48,12 @@ View::View(HWND hWndParent)
 }
 
 //===========================================================================
-View::~View()
+WidgetView::~WidgetView()
 {
 }
 
 //===========================================================================
-LRESULT View::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -67,11 +72,10 @@ LRESULT View::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 }
 
 //===========================================================================
-void View::createWindow(HWND hWndParent)
+void WidgetView::createWindow(HWND hWndParent)
 {
 	//-----------------------------------------------------------------------
-	//HWND    hWndParent    = nullptr;
-	LPCWSTR lpszClassName = View_ClassName;
+	LPCWSTR lpszClassName = WidgetView_ClassName;
 	LPCWSTR lpWindowName  = L"Window";
 	DWORD   dwStyle       = ChildWindowStyle;
 	DWORD   dwExStyle     = ChildWindowStyleEx;
@@ -102,91 +106,107 @@ void View::createWindow(HWND hWndParent)
 	);
 	if (nullptr==hWnd)
 	{
-		throw std::runtime_error("View::createWindow() failed");
+		throw std::runtime_error("WidgetView::createWindow() failed");
 	}
 }
 
-void View::destroyWindow(void)
+void WidgetView::destroyWindow(void)
 {
 	if (_hWnd)
 	{
 		::DestroyWindow(_hWnd);
 	}
-
 	_hWnd = nullptr;
 }
 
 //===========================================================================
-LRESULT View::onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT View::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT View::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT View::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
-	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
-}
-
-LRESULT View::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
-{
-	//return TRUE;
-	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
-}
-
-LRESULT View::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
-{
-	PAINTSTRUCT ps;
-	HDC hdc;
-	int bkMode;
+	//-----------------------------------------------------------------------
+	SIZE size{ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
+	UINT type{ (UINT)wParam };
 
 
-	hdc = ::BeginPaint(hWnd, &ps);
+	//-----------------------------------------------------------------------
+	RECT rect;
 
-	bkMode = ::GetBkMode(hdc);
-	::SetBkMode(hdc, TRANSPARENT);
-	::TextOutW(hdc, 0, 0, L"View", 4);
-	::SetBkMode(hdc, bkMode);
+	GetClientRect(hWnd, &rect);
 
-	::EndPaint(hWnd, &ps);
+
+	//-----------------------------------------------------------------------
+	UINT cx;
+	UINT cy;
+
+
+	cx = static_cast<UINT>(rect.right - rect.left);
+	cy = static_cast<UINT>(rect.bottom - rect.top);
+
+
+	//-----------------------------------------------------------------------
+	if (_Render.get())
+	{
+		_Render->resize(_hWnd, cx, cy);
+	}
 
 
 	return 0;
-	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT View::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
-	int id = LOWORD(wParam);
-
-	switch (id)
-	{
-	case IDM_APP_ABOUT:
-		onCommand_App_About();
-		return 0;
-
-	default:
-		break;
-	}
-
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-void View::onCommand_App_About(void)
+LRESULT WidgetView::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
-	MessageBoxW(
-		_hWnd,
-		L"App_About",
-		L"App_About",
-		MB_OK
-	);
+	//-----------------------------------------------------------------------
+	if (_Render.get())
+	{
+		_Render->render(_hWnd);
+	}
+
+
+	//-----------------------------------------------------------------------
+	// The ValidateRect function validates the client area within a rectangle by
+	// removing the rectangle from the update region of the window.
+	::ValidateRect(_hWnd, nullptr);
+
+	return 0;
+}
+
+LRESULT WidgetView::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+}
+
+//===========================================================================
+void WidgetView::onIdle(void)
+{
+	//-----------------------------------------------------------------------
+#if 0
+	OutputDebugStringW(L"WidgetView::onIdle()\r\n");
+	Sleep(10);
+#endif
+
+
+	//-----------------------------------------------------------------------
+	if (_Render.get())
+	{
+		_Render->render(_hWnd);
+	}
 }

@@ -14,8 +14,8 @@
 #include "Window/MsgLoop.hpp"
 #include "Window/Direct2D.hpp"
 
-#include "AppWindow/ViewRender.hpp"
-#include "AppWindow/View.hpp"
+#include "AppWindow/WidgetViewRender.hpp"
+#include "AppWindow/WidgetView.hpp"
 #include "AppWindow/LogView.hpp"
 #include "AppWindow/MainFrame.hpp"
 
@@ -83,3 +83,7 @@ int APIENTRY wWinMain(
 
 	return 0;
 }
+
+
+
+

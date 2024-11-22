@@ -15,7 +15,9 @@ public:
 
 public:
 	Application();
-	~Application();
+
+public:
+	virtual ~Application();
 
 public:
 	bool initialize(HINSTANCE hInstance);

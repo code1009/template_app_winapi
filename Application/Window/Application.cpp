@@ -179,3 +179,7 @@ Application* ApplicationGet(void)
 
 	return &instance;
 }
+
+
+
+

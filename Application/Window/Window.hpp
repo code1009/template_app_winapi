@@ -42,6 +42,8 @@ public:
 
 public:
 	Window();
+
+public:
 	virtual ~Window();
 
 public:
@@ -63,4 +65,7 @@ public:
 //===========================================================================
 LRESULT __stdcall WindowProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 INT_PTR __stdcall DialogProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+
+
+
 
