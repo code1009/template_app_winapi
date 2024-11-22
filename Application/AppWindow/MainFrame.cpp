@@ -288,3 +288,7 @@ void MainFrame::onIdle(void)
 		_WidgetView->onIdle();
 	}
 }
+
+
+
+

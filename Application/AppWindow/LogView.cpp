@@ -423,3 +423,7 @@ LRESULT LogView::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
+
+
+
+

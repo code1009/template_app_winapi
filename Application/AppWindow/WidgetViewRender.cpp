@@ -278,3 +278,7 @@ void WidgetViewRender::drawContents(void)
 	// Draw the outline of a rectangle.
 	_pRenderTarget->DrawRectangle(&rectangle2, _pCornflowerBlueBrush, 4 * zoom);
 }
+
+
+
+

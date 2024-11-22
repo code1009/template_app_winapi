@@ -40,3 +40,7 @@ public:
 	void drawStatus(void);
 	void drawContents(void);
 };
+
+
+
+

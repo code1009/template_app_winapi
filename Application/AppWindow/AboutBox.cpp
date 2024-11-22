@@ -225,3 +225,7 @@ void AboutBox::setInformation(void)
 
 	SetDlgItemTextW(_hWnd, IDC_ABOUTBOX_APP_NOTE, app_note);
 }
+
+
+
+

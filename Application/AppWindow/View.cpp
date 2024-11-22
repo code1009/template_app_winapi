@@ -190,3 +190,7 @@ void View::onCommand_App_About(void)
 		MB_OK
 	);
 }
+
+
+
+

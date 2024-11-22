@@ -210,3 +210,7 @@ void WidgetView::onIdle(void)
 		_Render->render(_hWnd);
 	}
 }
+
+
+
+
