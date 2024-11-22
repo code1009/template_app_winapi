@@ -67,7 +67,7 @@ void LogListViewCtrl::createWindow(HWND hWndParent)
 		LVS_REPORT |
 		LVS_SHOWSELALWAYS |
 		//LVS_OWNERDATA |
-		//LVS_OWNERDRAWFIXED|
+		//LVS_OWNERDRAWFIXED |
 		0u;
 
 
@@ -115,8 +115,8 @@ void LogListViewCtrl::createWindow(HWND hWndParent)
 		LVS_EX_DOUBLEBUFFER |
 		LVS_EX_GRIDLINES |
 		LVS_EX_FULLROWSELECT |
-		//LVS_EX_LABELTIP 	    |
-		//LVS_EX_SUBITEMIMAGES    |
+		//LVS_EX_LABELTIP |
+		//LVS_EX_SUBITEMIMAGES |
 		//LVS_EX_TRANSPARENTBKGND |
 		0u;
 
@@ -165,6 +165,12 @@ LRESULT LogListViewCtrl::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, L
 //===========================================================================
 void LogListViewCtrl::initialize(void)
 {
+	initializeColumn();
+	initializeItems();
+}
+
+void LogListViewCtrl::initializeColumn(void)
+{
 	//-----------------------------------------------------------------------
 	LVCOLUMNW lvc[] =
 	{
@@ -188,8 +194,9 @@ void LogListViewCtrl::initialize(void)
 	{
 		ListView_InsertColumn(_hWnd, col, &lvc[col]);
 	}
-
-
+}
+void LogListViewCtrl::initializeItems(void)
+{
 	//-----------------------------------------------------------------------
 	std::wstring text;
 

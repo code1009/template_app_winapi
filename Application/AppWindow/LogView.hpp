@@ -33,6 +33,8 @@ public:
 
 public:
 	void initialize(void);
+	void initializeColumn(void);
+	void initializeItems(void);
 };
 
 
