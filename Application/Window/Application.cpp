@@ -54,7 +54,7 @@ void Application::DebugRuntimeMemoryCheck_enable(void)
 
 
 	memory_leack_p0 = new char[16];
-	memory_leack_p1 = cpp_rt_new char[16];
+	memory_leack_p1 = cpp_new char[16];
 	memory_leack_p2 = malloc(16);
 	memory_leack_p3 = calloc(16, 1);
 #endif
@@ -87,7 +87,7 @@ void Application::DebugRuntimeMemoryLeackCheck_start(void)
 
 
 	memory_leack_p0 = new char[16];
-	memory_leack_p1 = cpp_rt_new char[16];
+	memory_leack_p1 = cpp_new char[16];
 	memory_leack_p2 = malloc(16);
 	memory_leack_p3 = calloc(16, 1);
 #endif
