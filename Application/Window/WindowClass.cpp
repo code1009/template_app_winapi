@@ -22,7 +22,12 @@ WindowClass::~WindowClass()
 }
 
 //==============================================================================
-void WindowClass::registerWindowClass(LPCWSTR className, UINT idMenu, UINT idIcon, UINT idSmallIcon, UINT idCursor, UINT style)
+void WindowClass::registerWindowClass(
+	LPCWSTR className, 
+	UINT idMenu, 
+	UINT idIcon, UINT idSmallIcon, UINT idCursor, 
+	UINT style
+)
 {
 	//--------------------------------------------------------------------------
 	_ClassName = className;
@@ -31,19 +36,19 @@ void WindowClass::registerWindowClass(LPCWSTR className, UINT idMenu, UINT idIco
 	//--------------------------------------------------------------------------
 	memset(&_WndClass, 0, sizeof(_WndClass));
 
-	_WndClass.cbSize = sizeof(_WndClass);
-	//_WndClass.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS
-	_WndClass.style = style;
-	_WndClass.cbClsExtra = 0;
-	_WndClass.cbWndExtra = 0;
-	_WndClass.hInstance = ApplicationGet()->_hInstance;
-	_WndClass.lpfnWndProc = WindowProc;
+	_WndClass.cbSize        = sizeof(_WndClass);
+	//_WndClass.style       = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS
+	_WndClass.style         = style;
+	_WndClass.cbClsExtra    = 0;
+	_WndClass.cbWndExtra    = 0;
+	_WndClass.hInstance     = ApplicationGet()->_hInstance;
+	_WndClass.lpfnWndProc   = WindowProc;
 	_WndClass.lpszClassName = _ClassName.c_str();
-	_WndClass.lpszMenuName = idMenu ? MAKEINTRESOURCEW(idMenu) : nullptr;
+	_WndClass.lpszMenuName  = MAKEINTRESOURCEW(idMenu);
 	_WndClass.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
-	_WndClass.hCursor = ::LoadCursorW(nullptr, MAKEINTRESOURCEW(idCursor));
-	_WndClass.hIcon = idIcon ? ::LoadIconW(ApplicationGet()->_hInstance, MAKEINTRESOURCEW(idIcon)) : nullptr;
-	_WndClass.hIconSm = idSmallIcon ? ::LoadIconW(ApplicationGet()->_hInstance, MAKEINTRESOURCEW(idSmallIcon)) : nullptr;
+	_WndClass.hCursor       = ::LoadCursorW(nullptr, MAKEINTRESOURCEW(idCursor));
+	_WndClass.hIcon         = ::LoadIconW(ApplicationGet()->_hInstance, MAKEINTRESOURCEW(idIcon));
+	_WndClass.hIconSm       = ::LoadIconW(ApplicationGet()->_hInstance, MAKEINTRESOURCEW(idSmallIcon));
 
 
 
