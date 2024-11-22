@@ -138,6 +138,7 @@
     <ClInclude Include="AppWindow\AboutBox.hpp" />
     <ClInclude Include="AppWindow\MainFrame.hpp" />
     <ClInclude Include="AppWindow\pch.hpp" />
+    <ClInclude Include="AppWindow\View.hpp" />
     <ClInclude Include="pch.hpp" />
     <ClInclude Include="Resource\Resource.h" />
     <ClInclude Include="targetver.h" />
@@ -150,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="AppWindow\AboutBox.cpp" />
     <ClCompile Include="AppWindow\MainFrame.cpp" />
+    <ClCompile Include="AppWindow\View.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

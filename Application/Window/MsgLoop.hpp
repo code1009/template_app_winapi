@@ -10,6 +10,9 @@
 //==============================================================================
 class MsgLoop
 {
+private:
+	std::vector< std::function<void(void)> > _idleHandlers;
+
 public:
 	MsgLoop();
 	virtual ~MsgLoop();
@@ -27,9 +30,6 @@ public:
 public:
 	virtual void runMsgLoop(void);
 	virtual void onIdle(void);
-
-private:
-	std::vector< std::function<void(void)> > _idleHandlers;
 };
 
 

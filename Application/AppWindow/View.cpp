@@ -5,10 +5,7 @@
 #include "../Window/WindowClass.hpp"
 #include "../Window/Window.hpp"
 #include "../Resource/Resource.h"
-
 #include "View.hpp"
-#include "MainFrame.hpp"
-#include "AboutBox.hpp"
 
 
 
@@ -16,7 +13,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //==============================================================================
-constexpr LPCWSTR MainFrame_ClassName = L"xMainFrame";
+constexpr LPCWSTR View_ClassName = L"xView";
 
 
 
@@ -24,33 +21,29 @@ constexpr LPCWSTR MainFrame_ClassName = L"xMainFrame";
 
 ////////////////////////////////////////////////////////////////////////////////
 //==============================================================================
-MainFrame::MainFrame()
+View::View(HWND hWndParent)
 {
 	WindowClass windowClass;
 
 
 	windowClass.registerWindowClass(
-		MainFrame_ClassName, 
-		IDC_MAINFRAME, 
-		IDI_MAINFRAME, IDI_SMALL
+		View_ClassName
 	);
 
 
-	createWindow();
-
-	_View = std::make_unique<View>(_hWnd);
+	createWindow(hWndParent);
 
 	ShowWindow(_hWnd, SW_SHOW);
 	UpdateWindow(_hWnd);
 }
 
 //==============================================================================
-MainFrame::~MainFrame()
+View::~View()
 {
 }
 
 //==============================================================================
-LRESULT MainFrame::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -69,13 +62,13 @@ LRESULT MainFrame::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 }
 
 //==============================================================================
-void MainFrame::createWindow(void)
+void View::createWindow(HWND hWndParent)
 {
-	HWND    hWndParent    = nullptr;
-	LPCWSTR lpszClassName = MainFrame_ClassName;
+	//HWND    hWndParent    = nullptr;
+	LPCWSTR lpszClassName = View_ClassName;
 	LPCWSTR lpWindowName  = L"Window";
-	DWORD   dwStyle       = FrameWindowStyle;
-	DWORD   dwExStyle     = FrameWindowStyleEx;
+	DWORD   dwStyle       = ChildWindowStyle;
+	DWORD   dwExStyle     = ChildWindowStyleEx;
 	int     X             = CW_USEDEFAULT;
 	int     Y             = CW_USEDEFAULT;
 	int     nWidth        = CW_USEDEFAULT;
@@ -104,11 +97,11 @@ void MainFrame::createWindow(void)
 
 	if (nullptr==hWnd)
 	{
-		throw std::runtime_error("MainFrame::createWindow() failed");
+		throw std::runtime_error("View::createWindow() failed");
 	}
 }
 
-void MainFrame::destroyWindow(void)
+void View::destroyWindow(void)
 {
 	if (_hWnd)
 	{
@@ -119,52 +112,33 @@ void MainFrame::destroyWindow(void)
 }
 
 //==============================================================================
-LRESULT MainFrame::onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainFrame::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
-	::PostQuitMessage(0);
-
-	return 0;
-	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
-}
-
-LRESULT MainFrame::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
-{
-	//destroyWindow();
-
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
-	SIZE size { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
-	UINT type { (UINT)wParam };
-
-
-	RECT rect;
-
-	GetClientRect(hWnd, &rect);
-
-
-	if (_View.get())
-	{
-		::MoveWindow(_View->_hWnd, 0, 0, rect.right, rect.bottom, TRUE);
-	}
-
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainFrame::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+}
+
+LRESULT View::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	//return 1;
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	PAINTSTRUCT ps;
 	HDC hdc;
@@ -175,7 +149,7 @@ LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 
 	bkMode = ::GetBkMode(hdc);
 	::SetBkMode(hdc, TRANSPARENT);
-	::TextOutW(hdc, 0, 0, L"MainFrame", 9);
+	::TextOutW(hdc, 0, 0, L"View", 4);
 	::SetBkMode(hdc, bkMode);
 
 	::EndPaint(hWnd, &ps);
@@ -185,7 +159,7 @@ LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainFrame::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	int id = LOWORD(wParam);
 
@@ -195,58 +169,28 @@ LRESULT MainFrame::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPa
 		onCommand_App_About();
 		return 0;
 
-	case IDM_APP_EXIT:
-		onCommand_App_Exit();
-		return 0;
-
 	default:
-		if (_View.get())
-		{
-			return ::SendMessage(_View->_hWnd, uMsg, wParam, lParam);
-		}
 		break;
 	}
 
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-void MainFrame::onCommand_App_About(void)
+void View::onCommand_App_About(void)
 {
-	AboutBox aboutBox;
-	INT_PTR rv;
-
-
-	rv = DialogBoxParamW(
-		ApplicationGet()->_hInstance, MAKEINTRESOURCE(IDD_ABOUTBOX), 
-		_hWnd, 
-		DialogProc,
-		reinterpret_cast<LPARAM>(&aboutBox)
+	MessageBoxW(
+		_hWnd,
+		L"App_About",
+		L"App_About",
+		MB_OK
 	);
-	switch (rv)
-	{
-	case IDOK:
-		break;
-
-	case IDCANCEL:
-		break;
-
-	default:
-		break;
-	}
-}
-
-void MainFrame::onCommand_App_Exit(void)
-{
-	destroyWindow();
 }
 
 //==============================================================================
-void MainFrame::onIdle(void)
+void View::onIdle(void)
 {
-//	OutputDebugStringW(L"MainFrame::onIdle()\r\n");
-//	Sleep(10);
-	if (_View.get())
-	{
-		_View->onIdle();
-	}
+	OutputDebugStringW(L"View::onIdle()\r\n");
+	Sleep(10);
+
+
 }

@@ -48,6 +48,9 @@
     <ClInclude Include="AppWindow\AboutBox.hpp">
       <Filter>Root\AppWindow</Filter>
     </ClInclude>
+    <ClInclude Include="AppWindow\View.hpp">
+      <Filter>Root\AppWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -72,6 +75,9 @@
       <Filter>Root\Window</Filter>
     </ClCompile>
     <ClCompile Include="AppWindow\AboutBox.cpp">
+      <Filter>Root\AppWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="AppWindow\View.cpp">
       <Filter>Root\AppWindow</Filter>
     </ClCompile>
   </ItemGroup>

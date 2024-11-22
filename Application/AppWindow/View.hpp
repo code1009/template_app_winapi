@@ -8,20 +8,17 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //==============================================================================
-class MainFrame : public Window
+class View : public Window
 {
 public:
-	std::unique_ptr<View> _View;
-
-public:
-	MainFrame();
-	virtual ~MainFrame();
+	explicit View(HWND hWndParent);
+	virtual ~View();
 
 public:
 	virtual LRESULT onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam) override;
 
 public:
-	void createWindow(void);
+	void createWindow(HWND hWndParent);
 	void destroyWindow(void);
 
 public:
@@ -33,7 +30,6 @@ public:
 	LRESULT onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	void onCommand_App_About(void);
-	void onCommand_App_Exit(void);
 
 public:
 	void onIdle(void);

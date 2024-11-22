@@ -13,6 +13,7 @@
 #include "Window/Window.hpp"
 #include "Window/MsgLoop.hpp"
 
+#include "AppWindow/View.hpp"
 #include "AppWindow/MainFrame.hpp"
 
 
