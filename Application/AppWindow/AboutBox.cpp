@@ -11,9 +11,11 @@
 
 
 
-////////////////////////////////////////////////////////////////////////////////
-//==============================================================================
-constexpr LPCWSTR AboutBox_ClassName = L"xAboutBox";
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
+// 	winver.h(Windows.h 포함)
+// Api-ms-win-core-version-l1-1-0.dll
+#pragma comment (lib, "Version.lib")
 
 
 
@@ -57,6 +59,8 @@ LRESULT AboutBox::onInitDialog(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM l
 	대화 상자 프로시저가 FALSE를 반환하면 대화 관리자가 메시지에 대한 응답으로 
 	기본 대화 상자 작업을 수행합니다.
 	*/
+	setInformation();
+
 	return TRUE;
 }
 
@@ -77,6 +81,7 @@ LRESULT AboutBox::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 
 LRESULT AboutBox::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
+#if 0
 	PAINTSTRUCT ps;	
 	HDC hdc;
 	int bkMode;
@@ -86,13 +91,16 @@ LRESULT AboutBox::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 
 	bkMode = ::GetBkMode(hdc);
 	::SetBkMode(hdc, TRANSPARENT);
-	::TextOutW(hdc, 10, 10, L"AboutBox", 14);
+	::TextOutW(hdc, 0, 0, L"AboutBox", 8);
 	::SetBkMode(hdc, bkMode);
 
 	::EndPaint(hWnd, &ps);
 
 
 	return TRUE;
+#endif
+
+	return FALSE;
 }
 
 LRESULT AboutBox::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
@@ -127,3 +135,87 @@ void AboutBox::onCommand_Cancel(void)
 	::EndDialog(_hWnd, IDCANCEL);
 }
 
+void AboutBox::setInformation(void)
+{
+	//-----------------------------------------------------------------------
+	int v0;
+	int v1;
+	int v2;
+	int v3;
+
+
+	v0 = 0;
+	v1 = 0;
+	v2 = 0;
+	v3 = 0;
+
+
+	//-----------------------------------------------------------------------
+	wchar_t szFileName[MAX_PATH] = { '\0' };
+
+
+	GetModuleFileNameW(ApplicationGet()->_hInstance, szFileName, sizeof(szFileName)/sizeof(wchar_t));
+
+
+	//-----------------------------------------------------------------------
+	DWORD dwHandle = 0;
+	DWORD dwLen = 0;
+
+
+	dwLen = GetFileVersionInfoSize(szFileName, &dwHandle);
+	if (dwLen)
+	{
+		std::vector<BYTE> data(dwLen);
+
+
+		if (GetFileVersionInfoW(szFileName, dwHandle, dwLen, &data[0]))
+		{
+			VS_FIXEDFILEINFO* pInfo;
+			UINT uLen;
+
+
+			if (VerQueryValueW(&data[0], L"\\", reinterpret_cast<LPVOID*>(&pInfo), &uLen))
+			{
+				v0 = pInfo->dwProductVersionMS >> 16;
+				v1 = pInfo->dwProductVersionMS & 0xffff;
+				v2 = pInfo->dwProductVersionLS >> 16;
+				v3 = pInfo->dwProductVersionLS & 0xffff;
+			}
+		}
+	}
+
+
+	//-----------------------------------------------------------------------
+	//TCHAR app_version[256];
+	wchar_t app_version[256];
+
+
+	//_stprintf_s(app_version, _T("버젼 %d.%d.%d.%d"),
+	swprintf_s(app_version, L"버젼 %d.%d.%d.%d",
+		v0,
+		v1,
+		v2,
+		v3
+	);
+
+	SetDlgItemTextW(_hWnd, IDC_ABOUTBOX_APP_VERSION, app_version);
+
+
+	//-----------------------------------------------------------------------
+	wchar_t app_name[256];
+
+
+	LoadStringW(ApplicationGet()->_hInstance, IDS_APPLICATION, app_name, sizeof(app_name)/sizeof(wchar_t));
+	SetDlgItemTextW(_hWnd, IDC_ABOUTBOX_APP_NAME, app_name);
+
+
+	//-----------------------------------------------------------------------
+	wchar_t app_note[1024] =
+	{
+	L"이 컴퓨터 프로그램은 저작권법과 국제 협약의 보호를 받습니다."        L"\r\n"
+	L"이 프로그램의 전부 또는 일부를 무단으로 복제, 배포하는 행위는"       L"\r\n"
+	L"민사 및 형사법에 의해 엄격히 규제되어 있으며, 기소 사유가 됩니다."   L"\r\n"
+	};
+
+	SetDlgItemTextW(_hWnd, IDC_ABOUTBOX_APP_NOTE, app_note);
+}

@@ -28,6 +28,7 @@ public:
 public:
 	void onCommand_OK(void);
 	void onCommand_Cancel(void);
+	void setInformation(void);
 };
 
 

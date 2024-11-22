@@ -27,7 +27,11 @@ MainFrame::MainFrame()
 	WindowClass windowClass;
 
 
-	windowClass.registerWindowClass(MainFrame_ClassName, IDC_MAINFRAME, IDI_MAINFRAME, IDI_SMALL);
+	windowClass.registerWindowClass(
+		MainFrame_ClassName, 
+		IDC_MAINFRAME, 
+		IDI_MAINFRAME, IDI_SMALL
+	);
 
 
 	createWindow();
@@ -67,16 +71,16 @@ void MainFrame::createWindow(void)
 	constexpr DWORD FrameWindowStyleEx = WS_EX_APPWINDOW | WS_EX_WINDOWEDGE;
 
 
-	HWND hWndParent = nullptr;
+	HWND    hWndParent    = nullptr;
 	LPCWSTR lpszClassName = MainFrame_ClassName;
-	LPCWSTR lpWindowName = L"Window";
-	DWORD dwStyle = FrameWindowStyle;
-	DWORD dwExStyle = FrameWindowStyleEx;
-	int X = CW_USEDEFAULT;
-	int Y = CW_USEDEFAULT;
-	int nWidth = CW_USEDEFAULT;
-	int nHeight = CW_USEDEFAULT;
-	HMENU hMenu = nullptr;
+	LPCWSTR lpWindowName  = L"Window";
+	DWORD   dwStyle       = FrameWindowStyle;
+	DWORD   dwExStyle     = FrameWindowStyleEx;
+	int     X             = CW_USEDEFAULT;
+	int     Y             = CW_USEDEFAULT;
+	int     nWidth        = CW_USEDEFAULT;
+	int     nHeight       = CW_USEDEFAULT;
+	HMENU   hMenu         = nullptr;
 
 
 	//--------------------------------------------------------------------------

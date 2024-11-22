@@ -11,6 +11,9 @@
 #define IDM_APP_EXIT                    201
 #define IDM_APP_ABOUT                   202
 #define IDD_ABOUTBOX                    301
+#define IDC_ABOUTBOX_APP_NAME           1000
+#define IDC_ABOUTBOX_APP_VERSION        1001
+#define IDC_ABOUTBOX_APP_NOTE           1002
 
 #define IDC_STATIC                      -1
 
@@ -21,7 +24,7 @@
 #define _APS_NO_MFC                     1
 #define _APS_NEXT_RESOURCE_VALUE        303
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1000
+#define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           110
 #endif
 #endif
