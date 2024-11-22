@@ -51,6 +51,9 @@
     <ClInclude Include="AppWindow\View.hpp">
       <Filter>Root\AppWindow</Filter>
     </ClInclude>
+    <ClInclude Include="Window\Direct2D.hpp">
+      <Filter>Root\Window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -79,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="AppWindow\View.cpp">
       <Filter>Root\AppWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\Direct2D.cpp">
+      <Filter>Root\Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

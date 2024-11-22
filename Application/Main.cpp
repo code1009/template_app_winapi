@@ -12,6 +12,7 @@
 #include "Window/WindowClass.hpp"
 #include "Window/Window.hpp"
 #include "Window/MsgLoop.hpp"
+#include "Window/Direct2D.hpp"
 
 #include "AppWindow/View.hpp"
 #include "AppWindow/MainFrame.hpp"
@@ -49,8 +50,14 @@ int APIENTRY wWinMain(
 	int       nCmdShow
 )
 {
-	ApplicationGet()->initInstance(hInstance);
+	bool rv;
 
+
+	rv = ApplicationGet()->initialize(hInstance);
+	if (rv == false)
+	{
+		return -1;
+	}
 
 
 	try
@@ -68,7 +75,7 @@ int APIENTRY wWinMain(
 
 
 
-	ApplicationGet()->termInstance();
+	ApplicationGet()->terminate();
 
 
 

@@ -4,6 +4,7 @@
 #include "../Window/Application.hpp"
 #include "../Window/WindowClass.hpp"
 #include "../Window/Window.hpp"
+#include "../Window/Direct2D.hpp"
 #include "../Resource/Resource.h"
 
 #include "View.hpp"
@@ -26,6 +27,7 @@ constexpr LPCWSTR MainFrame_ClassName = L"xMainFrame";
 //==============================================================================
 MainFrame::MainFrame()
 {
+	//--------------------------------------------------------------------------
 	WindowClass windowClass;
 
 
@@ -36,10 +38,15 @@ MainFrame::MainFrame()
 	);
 
 
+	//--------------------------------------------------------------------------
 	createWindow();
 
+
+	//--------------------------------------------------------------------------
 	_View = std::make_unique<View>(_hWnd);
 
+
+	//--------------------------------------------------------------------------
 	ShowWindow(_hWnd, SW_SHOW);
 	UpdateWindow(_hWnd);
 }
@@ -160,8 +167,8 @@ LRESULT MainFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 
 
 	//--------------------------------------------------------------------------
-
-	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+	return 0;
+	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
 LRESULT MainFrame::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)

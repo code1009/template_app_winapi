@@ -11,6 +11,9 @@
 class View : public Window
 {
 public:
+	std::unique_ptr<Direct2D> _Direct2D;
+
+public:
 	explicit View(HWND hWndParent);
 	virtual ~View();
 

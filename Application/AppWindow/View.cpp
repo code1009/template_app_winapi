@@ -4,6 +4,7 @@
 #include "../Window/Application.hpp"
 #include "../Window/WindowClass.hpp"
 #include "../Window/Window.hpp"
+#include "../Window/Direct2D.hpp"
 #include "../Resource/Resource.h"
 #include "View.hpp"
 
@@ -23,6 +24,7 @@ constexpr LPCWSTR View_ClassName = L"xView";
 //==============================================================================
 View::View(HWND hWndParent)
 {
+	//--------------------------------------------------------------------------
 	WindowClass windowClass;
 
 
@@ -31,6 +33,11 @@ View::View(HWND hWndParent)
 	);
 
 
+	//--------------------------------------------------------------------------
+	_Direct2D = std::make_unique<Direct2D>();
+
+
+	//--------------------------------------------------------------------------
 	createWindow(hWndParent);
 
 	ShowWindow(_hWnd, SW_SHOW);
@@ -64,6 +71,7 @@ LRESULT View::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 //==============================================================================
 void View::createWindow(HWND hWndParent)
 {
+	//--------------------------------------------------------------------------
 	//HWND    hWndParent    = nullptr;
 	LPCWSTR lpszClassName = View_ClassName;
 	LPCWSTR lpWindowName  = L"Window";
@@ -129,7 +137,33 @@ LRESULT View::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 
 LRESULT View::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
-	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+	//--------------------------------------------------------------------------
+	SIZE size{ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
+	UINT type{ (UINT)wParam };
+
+
+	//--------------------------------------------------------------------------
+	RECT rect;
+
+	GetClientRect(hWnd, &rect);
+
+
+	//--------------------------------------------------------------------------
+	if (_Direct2D.get())
+	{
+		UINT cx;
+		UINT cy;
+
+
+		cx = static_cast<UINT>(rect.right  - rect.left);
+		cy = static_cast<UINT>(rect.bottom - rect.top );
+
+		_Direct2D->resize(_hWnd, cx, cy);
+	}
+
+
+	return 0;
+	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
 LRESULT View::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
@@ -138,6 +172,7 @@ LRESULT View::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
+#if 0
 LRESULT View::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	PAINTSTRUCT ps;
@@ -153,6 +188,24 @@ LRESULT View::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 	::SetBkMode(hdc, bkMode);
 
 	::EndPaint(hWnd, &ps);
+
+
+	return 0;
+	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+}
+#endif
+
+LRESULT View::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	if (_Direct2D.get())
+	{
+		_Direct2D->render(_hWnd);
+	}
+
+
+	// The ValidateRect function validates the client area within a rectangle by
+	// removing the rectangle from the update region of the window.
+	::ValidateRect(_hWnd, nullptr);
 
 
 	return 0;

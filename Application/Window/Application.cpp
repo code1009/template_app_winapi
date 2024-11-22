@@ -2,6 +2,7 @@
 //==============================================================================
 #include "pch.hpp"
 #include "Application.hpp"
+#include "Direct2D.hpp"
 
 
 
@@ -19,23 +20,58 @@ Application::~Application()
 }
 
 //==============================================================================
-void Application::initInstance(HINSTANCE hInstance)
+bool Application::initialize(HINSTANCE hInstance)
 {
 	_hInstance = hInstance;
 
-	DebugRuntimeMemoryCheck_enable();
-	DebugRuntimeMemoryLeackCheck_start();
+
+	//--------------------------------------------------------------------------
+	if (initializeCOM() == false)
+	{
+		return false;
+	}
+
+
+	//--------------------------------------------------------------------------
+	if (Direct2D::newFactory() == false)
+	{
+		uninitializeCOM();
+
+		return false;
+	}
+
+
+	//--------------------------------------------------------------------------
+	enableDebugRuntimeMemoryCheck();
+
+
+	//--------------------------------------------------------------------------
+	startDebugRuntimeMemoryLeackCheck();
+
+
+	return true;
 }
 
-void Application::termInstance(void)
+void Application::terminate(void)
 {
-	DebugRuntimeMemoryLeackCheck_end();
+	//--------------------------------------------------------------------------
+	endDebugRuntimeMemoryLeackCheck();
 
+
+	//--------------------------------------------------------------------------
+	Direct2D::deleteFactory();
+
+
+	//--------------------------------------------------------------------------
+	uninitializeCOM();
+
+
+	//--------------------------------------------------------------------------
 	_hInstance = nullptr;
 }
 
 //==============================================================================
-void Application::DebugRuntimeMemoryCheck_enable(void)
+void Application::enableDebugRuntimeMemoryCheck(void)
 {
 	//--------------------------------------------------------------------------
 #ifdef _DEBUG
@@ -69,7 +105,7 @@ static _CrtMemState _CrtMemState_diff;
 #endif
 
 //==============================================================================
-void Application::DebugRuntimeMemoryLeackCheck_start(void)
+void Application::startDebugRuntimeMemoryLeackCheck(void)
 {
 	//--------------------------------------------------------------------------
 #ifdef _DEBUG
@@ -94,7 +130,7 @@ void Application::DebugRuntimeMemoryLeackCheck_start(void)
 #endif
 }
 
-void Application::DebugRuntimeMemoryLeackCheck_end(void)
+void Application::endDebugRuntimeMemoryLeackCheck(void)
 {
 #ifdef _DEBUG
 	_CrtMemCheckpoint(&_CrtMemState_end);
@@ -107,6 +143,29 @@ void Application::DebugRuntimeMemoryLeackCheck_end(void)
 #endif
 }
 
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+//==============================================================================
+bool Application::initializeCOM(void)
+{
+	HRESULT hr;
+
+
+	hr = CoInitialize(nullptr);
+	if (FAILED(hr))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+void Application::uninitializeCOM(void)
+{
+	CoUninitialize();
+}
 
 
 

@@ -18,13 +18,17 @@ public:
 	~Application();
 
 public:
-	void initInstance(HINSTANCE hInstance);
-	void termInstance(void);
+	bool initialize(HINSTANCE hInstance);
+	void terminate(void);
 
 public:
-	void DebugRuntimeMemoryCheck_enable(void);
-	void DebugRuntimeMemoryLeackCheck_start(void);
-	void DebugRuntimeMemoryLeackCheck_end(void);
+	void enableDebugRuntimeMemoryCheck(void);
+	void startDebugRuntimeMemoryLeackCheck(void);
+	void endDebugRuntimeMemoryLeackCheck(void);
+
+public:
+	bool initializeCOM(void);
+	void uninitializeCOM(void);
 };
 
 
