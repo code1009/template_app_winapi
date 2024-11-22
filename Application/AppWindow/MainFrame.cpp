@@ -211,6 +211,7 @@ LRESULT MainFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 		::MoveWindow(_LogView   ->_hWnd, 0, _w0 + _Splitter._Width, cx, _w1, TRUE);
 	}
 
+
 	//-----------------------------------------------------------------------
 	return 0;
 	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
@@ -238,11 +239,11 @@ LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 	::SetBkMode(hdc, bkMode);
 
 
-	const HBRUSH hBrush = CreateSolidBrush(RGB(128, 128, 255));
-	const HPEN hPen = CreatePen(PS_SOLID, 1, RGB(128, 128, 255));
-
 	RECT rect;
 	GetClientRect(hWnd, &rect);
+
+	const HBRUSH hBrush = CreateSolidBrush(RGB(128, 128, 255));
+	const HPEN hPen = CreatePen(PS_SOLID, 1, RGB(128, 128, 255));
 
 	const HGDIOBJ hOldBrush = SelectObject(hdc, hBrush);
 	const HGDIOBJ hOldPen = SelectObject(hdc, hPen);
