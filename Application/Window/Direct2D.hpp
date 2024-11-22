@@ -1,26 +1,24 @@
-﻿////////////////////////////////////////////////////////////////////////////////
-//==============================================================================
+﻿/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
 #pragma once
 
 
 
 
 
-////////////////////////////////////////////////////////////////////////////////
-//==============================================================================
+/////////////////////////////////////////////////////////////////////////////
+//===========================================================================
 class Direct2D
 {
 public:
-	static ID2D1Factory* _Factory;
+	static ID2D1Factory* _pFactory;
 
 public:
 	static bool newFactory(void);
 	static void deleteFactory(void);
 
 public:
-	ID2D1HwndRenderTarget* _RenderTarget{ nullptr };
-	ID2D1SolidColorBrush* _LightSlateGrayBrush{ nullptr };
-	ID2D1SolidColorBrush* _CornflowerBlueBrush{ nullptr };
+	ID2D1HwndRenderTarget* _pRenderTarget{ nullptr };
 
 public:
 	Direct2D();
