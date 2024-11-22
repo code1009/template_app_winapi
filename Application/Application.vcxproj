@@ -172,6 +172,9 @@
   <ItemGroup>
     <Text Include="Window\Application.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="Resource\Application.manifest" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

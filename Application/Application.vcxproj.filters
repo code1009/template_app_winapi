@@ -93,4 +93,9 @@
       <Filter>Root\Window</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="Resource\Application.manifest">
+      <Filter>Root\Resource</Filter>
+    </Manifest>
+  </ItemGroup>
 </Project>
