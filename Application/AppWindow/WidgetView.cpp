@@ -86,6 +86,10 @@ void WidgetView::createWindow(HWND hWndParent)
 	HMENU   hMenu         = nullptr;
 
 
+	dwStyle |= WS_VSCROLL;
+	dwStyle |= WS_HSCROLL;
+
+
 	//-----------------------------------------------------------------------
 	HWND hWnd;
 
