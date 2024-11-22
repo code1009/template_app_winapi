@@ -35,7 +35,8 @@ public:
 
 public:
 	void calculateFPS(void);
-	void renderFPS(void);
+	void drawStatus(void);
+	void drawContents(void);
 };
 
 

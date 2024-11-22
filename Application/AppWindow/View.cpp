@@ -10,6 +10,8 @@
 
 
 
+
+
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 ViewRender::ViewRender()
@@ -42,17 +44,6 @@ bool ViewRender::createDeviceResources(HWND hWnd)
 	//-----------------------------------------------------------------------
 	if (!_pTextBrush)
 	{
-		hr = _pRenderTarget->CreateSolidColorBrush(
-			D2D1::ColorF(D2D1::ColorF::Black),
-			&_pTextBrush
-		);
-		if (FAILED(hr))
-		{
-			destroyDeviceResources();
-			return false;
-		}
-
-
 		IDWriteFactory* pDWriteFactory = nullptr;
 
 
@@ -68,14 +59,29 @@ bool ViewRender::createDeviceResources(HWND hWnd)
 		}
 
 
+
+		hr = _pRenderTarget->CreateSolidColorBrush(
+			D2D1::ColorF(D2D1::ColorF::Black),
+			&_pTextBrush
+		);
+		if (FAILED(hr))
+		{
+			destroyDeviceResources();
+			return false;
+		}
+
+
 		hr = pDWriteFactory->CreateTextFormat(
-			L"Arial",
+			//L"Arial",
+			L"돋움",
+			//L"FixedSys",
 			nullptr,
-			DWRITE_FONT_WEIGHT_NORMAL,
+			DWRITE_FONT_WEIGHT_ULTRA_BLACK, // DWRITE_FONT_WEIGHT_NORMAL,
 			DWRITE_FONT_STYLE_NORMAL,
 			DWRITE_FONT_STRETCH_NORMAL,
-			24.0f,
-			L"en-us",
+			16.0f,
+			//L"en-us",
+			L"ko-kr",
 			&_pTextFormat
 		);
 		if (FAILED(hr))
@@ -87,8 +93,6 @@ bool ViewRender::createDeviceResources(HWND hWnd)
 
 		pDWriteFactory->Release();
 		pDWriteFactory = nullptr;
-
-
 	}
 
 
@@ -172,31 +176,72 @@ void ViewRender::calculateFPS(void)
 	}
 }
 
-void ViewRender::renderFPS(void)
-{
-	std::wstring fpsText; 
-	
-	
-	fpsText = L"FPS: " + std::to_wstring(static_cast<int>(_fps));
-
-	_pRenderTarget->DrawTextW(
-		fpsText.c_str(),
-		static_cast<UINT32>(fpsText.length()),
-		_pTextFormat,
-		D2D1::RectF(0, 0, 200, 50),
-		_pTextBrush
-	);
-}
-
 void ViewRender::on_render(void)
 {
 	calculateFPS();
 
-
-	float zoom = 1;
-
-
 	_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
+	drawContents();
+
+	drawStatus();
+}
+
+void ViewRender::drawStatus(void)
+{
+	SYSTEMTIME st;
+
+
+	GetLocalTime(&st);
+
+
+	wchar_t timeText[256];
+
+
+	swprintf_s(timeText, L"%02d:%02d:%02d.%03d",
+		st.wHour,
+		st.wMinute,
+		st.wSecond,
+		st.wMilliseconds
+	);
+
+
+	wchar_t frameText[256];
+
+
+	swprintf_s(frameText, L"%03d frame",
+		static_cast<int>(_frameCount)
+	);
+
+
+	wchar_t fpsText[256];
+
+
+	swprintf_s(fpsText, L"%03d fps",
+		static_cast<int>(_fps)
+	);
+
+
+
+	std::wstring text;
+
+
+	text  = timeText ; text += L"\n";
+	text += frameText; text += L"\n";
+	text += fpsText  ; text += L"\n";
+
+
+	_pRenderTarget->DrawTextW(
+		text.c_str(),
+		static_cast<UINT32>(text.length()),
+		_pTextFormat,
+		D2D1::RectF(0, 0, 400, 200),
+		_pTextBrush
+	);
+}
+
+void ViewRender::drawContents(void)
+{
+	float zoom = 1;
 
 
 	D2D1_SIZE_F rtSize = _pRenderTarget->GetSize();
@@ -246,11 +291,7 @@ void ViewRender::on_render(void)
 
 	// Draw the outline of a rectangle.
 	_pRenderTarget->DrawRectangle(&rectangle2, _pCornflowerBlueBrush, 4 * zoom);
-
-
-	renderFPS();
 }
-
 
 
 
