@@ -141,26 +141,32 @@ LRESULT MainFrame::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 
 LRESULT MainFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
+	//--------------------------------------------------------------------------
 	SIZE size { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
 	UINT type { (UINT)wParam };
 
 
+	//--------------------------------------------------------------------------
 	RECT rect;
 
 	GetClientRect(hWnd, &rect);
 
 
+	//--------------------------------------------------------------------------
 	if (_View.get())
 	{
 		::MoveWindow(_View->_hWnd, 0, 0, rect.right, rect.bottom, TRUE);
 	}
+
+
+	//--------------------------------------------------------------------------
 
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
 LRESULT MainFrame::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
-	//return 1;
+	//return TRUE;
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 

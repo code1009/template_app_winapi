@@ -134,7 +134,7 @@ LRESULT View::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 
 LRESULT View::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
-	//return 1;
+	//return TRUE;
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
