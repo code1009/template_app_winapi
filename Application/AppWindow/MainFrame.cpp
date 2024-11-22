@@ -71,6 +71,7 @@ LRESULT MainFrame::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_ERASEBKGND: return onEraseBkGnd(hWnd, uMsg, wParam, lParam);
 	case WM_PAINT:      return onPaint     (hWnd, uMsg, wParam, lParam);
 	case WM_COMMAND:    return onCommand   (hWnd, uMsg, wParam, lParam);
+	case WM_NOTIFY:     return onNotify    (hWnd, uMsg, wParam, lParam);
 	default:
 		break;
 	}
@@ -278,6 +279,23 @@ void MainFrame::onCommand_App_About(void)
 void MainFrame::onCommand_App_Exit(void)
 {
 	destroyWindow();
+}
+
+LRESULT MainFrame::onNotify(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+#if 0
+	NMHDR* hdr = reinterpret_cast<NMHDR*>(lParam);
+
+
+	switch (hdr->code)
+	{
+	default:
+		break;
+	}
+#endif
+
+
+	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
 //===========================================================================

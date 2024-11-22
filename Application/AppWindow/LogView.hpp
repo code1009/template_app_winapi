@@ -35,6 +35,21 @@ public:
 	LRESULT onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 
+	LRESULT OnNotifyReflect(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+
+	LRESULT OnLvnGetDispInfo(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+
+	LRESULT OnNmCustomDraw(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnPrePaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnPostPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnPreErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnPostErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnItemPrePaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnItemPostPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnItemPreErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnItemPostErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnSubItemPrePaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+
 public:
 	void initialize(void);
 	void initializeColumn(void);
@@ -71,6 +86,7 @@ public:
 	LRESULT onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onNotify(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 };
 
 

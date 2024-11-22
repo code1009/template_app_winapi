@@ -37,6 +37,7 @@ public:
 	LRESULT onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	void onCommand_App_About(void);
 	void onCommand_App_Exit(void);
+	LRESULT onNotify(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 
 public:
 	void onIdle(void);

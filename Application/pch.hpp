@@ -27,6 +27,7 @@
 #include <Windows.h>
 #include <windowsx.h>
 #include <commctrl.h>
+#include <olectl.h>
 
 #include <d2d1.h>
 #include <d2d1helper.h>

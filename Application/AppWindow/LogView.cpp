@@ -30,13 +30,14 @@ LRESULT LogListViewCtrl::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM l
 {
 	switch (uMsg)
 	{
-	case WM_CREATE:     return onCreate    (hWnd, uMsg, wParam, lParam);
-	case WM_DESTROY:    return onDestroy   (hWnd, uMsg, wParam, lParam);
-	case WM_CLOSE:      return onClose     (hWnd, uMsg, wParam, lParam);
-	case WM_SIZE:       return onSize      (hWnd, uMsg, wParam, lParam);
-	case WM_ERASEBKGND: return onEraseBkGnd(hWnd, uMsg, wParam, lParam);
-	case WM_PAINT:      return onPaint     (hWnd, uMsg, wParam, lParam);
-	case WM_COMMAND:    return onCommand   (hWnd, uMsg, wParam, lParam);
+	case WM_CREATE:     return onCreate       (hWnd, uMsg, wParam, lParam);
+	case WM_DESTROY:    return onDestroy      (hWnd, uMsg, wParam, lParam);
+	case WM_CLOSE:      return onClose        (hWnd, uMsg, wParam, lParam);
+	case WM_SIZE:       return onSize         (hWnd, uMsg, wParam, lParam);
+	case WM_ERASEBKGND: return onEraseBkGnd   (hWnd, uMsg, wParam, lParam);
+	case WM_PAINT:      return onPaint        (hWnd, uMsg, wParam, lParam);
+	case WM_COMMAND:    return onCommand      (hWnd, uMsg, wParam, lParam);
+	case OCM_NOTIFY:    return OnNotifyReflect(hWnd, uMsg, wParam, lParam);
 	default:
 		break;
 	}
@@ -66,7 +67,7 @@ void LogListViewCtrl::createWindow(HWND hWndParent)
 		WS_CLIPCHILDREN |
 		LVS_REPORT |
 		LVS_SHOWSELALWAYS |
-		//LVS_OWNERDATA |
+		LVS_OWNERDATA |
 		//LVS_OWNERDRAWFIXED |
 		0u;
 
@@ -173,10 +174,211 @@ LRESULT LogListViewCtrl::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPAR
 }
 
 //===========================================================================
+LRESULT LogListViewCtrl::OnNotifyReflect(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	NMHDR* hdr = reinterpret_cast<NMHDR*>(lParam);
+
+
+	switch (hdr->code)
+	{
+	case LVN_GETDISPINFO: return OnLvnGetDispInfo(hWnd, uMsg, wParam, lParam);
+	case NM_CUSTOMDRAW: return OnNmCustomDraw(hWnd, uMsg, wParam, lParam);
+		break;
+
+	default:
+		break;
+	}
+
+
+	return ::CallWindowProcW(_ListViewWindowProc, hWnd, uMsg, wParam, lParam);
+}
+
+//===========================================================================
+LRESULT LogListViewCtrl::OnLvnGetDispInfo(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	//-----------------------------------------------------------------------
+	LV_DISPINFO* pLvDispInfo = reinterpret_cast<LV_DISPINFO*>(lParam);
+	LV_ITEM* pLvItem = &pLvDispInfo->item;
+
+
+	//-----------------------------------------------------------------------
+	int row;
+	int col;
+
+
+	row = pLvItem->iItem;
+	col = pLvItem->iSubItem;
+
+
+	//-----------------------------------------------------------------------
+	int index;
+	int count;
+	int item;
+	int item_max;
+
+
+	//count = static_cast<int>(row_max);
+	count = 100;
+
+
+	//item_max = static_cast<int>(col_max);
+	item_max = 4;
+	item = 999;
+
+
+	//-----------------------------------------------------------------------
+	constexpr bool Reverse = false;
+	if (Reverse)
+	{
+		index = count - row - 1;
+	}
+	else
+	{
+		index = row;
+	}
+
+
+	//-----------------------------------------------------------------------
+	switch (col)
+	{
+	case 0:
+	case 1:
+	case 2:
+	case 3:
+	case 4:
+		item = col;
+		break;
+
+	default:
+		break;
+	}
+
+
+	//-----------------------------------------------------------------------
+	std::wstring text;
+
+
+	switch (item)
+	{
+	case 0: text = std::to_wstring(row); break;
+	case 1: text = L"TEXT1"; break;
+	case 2: text = L"TEXT2"; break;
+	case 3: text = L"TEXT3"; break;
+	case 4: text = L"TEXT4"; break;
+	default:
+		break;
+	}
+	
+
+	//-----------------------------------------------------------------------
+	if (pLvItem->mask & LVIF_TEXT)
+	{
+		if (item_max > item)
+		{
+			wcsncpy_s(pLvItem->pszText, pLvItem->cchTextMax, text.c_str(), _TRUNCATE);
+		}
+		else
+		{
+			wcsncpy_s(pLvItem->pszText, pLvItem->cchTextMax, L" ", _TRUNCATE);
+		}
+	}
+
+
+	return 0;
+}
+
+//===========================================================================
+LRESULT LogListViewCtrl::OnNmCustomDraw(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	LPNMCUSTOMDRAW NmCustomDraw = reinterpret_cast<LPNMCUSTOMDRAW>(lParam);
+
+
+	switch (NmCustomDraw->dwDrawStage)
+	{
+	case  CDDS_PREPAINT     : return OnPrePaint       (hWnd, uMsg, wParam, lParam);
+	case  CDDS_POSTPAINT    : return OnPostPaint      (hWnd, uMsg, wParam, lParam);
+	case  CDDS_PREERASE     : return OnPreErase       (hWnd, uMsg, wParam, lParam);
+	case  CDDS_POSTERASE    : return OnPostErase      (hWnd, uMsg, wParam, lParam);
+	case  CDDS_ITEMPREPAINT : return OnItemPrePaint   (hWnd, uMsg, wParam, lParam);
+	case  CDDS_ITEMPOSTPAINT: return OnItemPostPaint  (hWnd, uMsg, wParam, lParam);
+	case  CDDS_ITEMPREERASE : return OnItemPreErase   (hWnd, uMsg, wParam, lParam);
+	case  CDDS_ITEMPOSTERASE: return OnItemPostErase  (hWnd, uMsg, wParam, lParam);
+	case (CDDS_ITEMPREPAINT |
+	      CDDS_SUBITEM)     : return OnSubItemPrePaint(hWnd, uMsg, wParam, lParam);
+
+	default:
+		break;
+	}
+
+	return ::CallWindowProcW(_ListViewWindowProc, hWnd, uMsg, wParam, lParam);
+}
+
+LRESULT LogListViewCtrl::OnPrePaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	return CDRF_NOTIFYITEMDRAW;
+}
+
+LRESULT LogListViewCtrl::OnPostPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	return CDRF_DODEFAULT;
+}
+
+LRESULT LogListViewCtrl::OnPreErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	return CDRF_DODEFAULT;
+}
+
+LRESULT LogListViewCtrl::OnPostErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	return CDRF_DODEFAULT;
+}
+
+LRESULT LogListViewCtrl::OnItemPrePaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	NMLVCUSTOMDRAW* pNmLvCustomDraw = reinterpret_cast<NMLVCUSTOMDRAW*>(lParam);
+
+	int row;
+	int col;
+
+
+	row = static_cast<int>(pNmLvCustomDraw->nmcd.dwItemSpec);
+	col = static_cast<int>(pNmLvCustomDraw->iSubItem);
+
+
+	pNmLvCustomDraw->clrText = RGB(0xff, 0x00, 0x00);
+	pNmLvCustomDraw->clrTextBk = RGB(0xff, 0xff, 0xff);
+
+
+	return CDRF_DODEFAULT;
+}
+
+LRESULT LogListViewCtrl::OnItemPostPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	return CDRF_DODEFAULT;
+}
+
+LRESULT LogListViewCtrl::OnItemPreErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	return CDRF_DODEFAULT;
+}
+
+LRESULT LogListViewCtrl::OnItemPostErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	return CDRF_DODEFAULT;
+}
+
+LRESULT LogListViewCtrl::OnSubItemPrePaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	return CDRF_DODEFAULT;
+}
+
+//===========================================================================
 void LogListViewCtrl::initialize(void)
 {
 	initializeColumn();
-	initializeItems();
+	//initializeItems();
+	
+	ListView_SetItemCountEx(_hWnd, 100, LVSICF_NOSCROLL);
 }
 
 void LogListViewCtrl::initializeColumn(void)
@@ -287,6 +489,7 @@ LRESULT LogView::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_ERASEBKGND: return onEraseBkGnd(hWnd, uMsg, wParam, lParam);
 	case WM_PAINT:      return onPaint     (hWnd, uMsg, wParam, lParam);
 	case WM_COMMAND:    return onCommand   (hWnd, uMsg, wParam, lParam);
+	case WM_NOTIFY:     return onNotify    (hWnd, uMsg, wParam, lParam);
 	default:
 		break;
 	}
@@ -424,6 +627,23 @@ LRESULT LogView::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
+LRESULT LogView::onNotify(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	NMHDR* hdr = reinterpret_cast<NMHDR*>(lParam);
+
+
+	if (_LogListViewCtrl.get())
+	{
+		// Do notification reflection if message came from a child window.
+		// Restricting OnNotifyReflect to child windows avoids double handling.
+		if (hdr->hwndFrom == _LogListViewCtrl->_hWnd)
+		{
+			return ::SendMessage(_LogListViewCtrl->_hWnd, OCM_NOTIFY, wParam, lParam);
+		}
+	}
+
+	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+}
 
 
 
