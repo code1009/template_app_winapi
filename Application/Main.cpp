@@ -14,6 +14,7 @@
 #include "Window/MsgLoop.hpp"
 #include "Window/Direct2D.hpp"
 
+#include "AppWindow/ViewRender.hpp"
 #include "AppWindow/View.hpp"
 #include "AppWindow/MainFrame.hpp"
 

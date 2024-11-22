@@ -7,6 +7,7 @@
 #include "../Window/Direct2D.hpp"
 #include "../Resource/Resource.h"
 
+#include "ViewRender.hpp"
 #include "View.hpp"
 #include "MainFrame.hpp"
 #include "AboutBox.hpp"
