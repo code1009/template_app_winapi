@@ -634,6 +634,9 @@ LRESULT LogView::onNotify(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 
 	if (_LogListViewCtrl.get())
 	{
+		// 리플렉션된 창 메시지 ID
+		// https://learn.microsoft.com/ko-kr/cpp/mfc/reflected-window-message-ids?view=msvc-170&devlangs=cpp&f1url=%3FappId%3DDev17IDEF1%26l%3DKO-KR%26k%3Dk(OCM_NOTIFY)%3Bk(DevLang-C%252B%252B)%3Bk(TargetOS-Windows)%26rd%3Dtrue
+		
 		// Do notification reflection if message came from a child window.
 		// Restricting OnNotifyReflect to child windows avoids double handling.
 		if (hdr->hwndFrom == _LogListViewCtrl->_hWnd)

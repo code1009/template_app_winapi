@@ -76,6 +76,13 @@ LRESULT MainFrame::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 
+	switch (uMsg)
+	{
+	case WM_LBUTTONDOWN: _Splitter.onLButtonDown(hWnd, uMsg, wParam, lParam); return 0;
+	case WM_MOUSEMOVE  : _Splitter.onMouseMove(hWnd, uMsg, wParam, lParam); return 0;
+	case WM_LBUTTONUP  : _Splitter.onLButtonUp(hWnd, uMsg, wParam, lParam); return 0;
+	}
+
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
@@ -85,7 +92,7 @@ void MainFrame::createWindow(void)
 	HWND    hWndParent    = nullptr;
 	LPCWSTR lpszClassName = MainFrame_ClassName;
 	LPCWSTR lpWindowName  = L"Window";
-	DWORD   dwStyle       = FrameWindowStyle;
+	DWORD   dwStyle       = WS_OVERLAPPEDWINDOW; // FrameWindowStyle;
 	DWORD   dwExStyle     = FrameWindowStyleEx;
 	int     X             = CW_USEDEFAULT;
 	int     Y             = CW_USEDEFAULT;
@@ -174,6 +181,7 @@ LRESULT MainFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 
 	//-----------------------------------------------------------------------
 	if (_WidgetView.get() && _LogView.get())
+#if 0
 	{
 		constexpr int logViewHeight = 200;
 
@@ -191,7 +199,17 @@ LRESULT MainFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 			::MoveWindow(_LogView->_hWnd, 0, 0, cx, cy, TRUE);
 		}
 	}
+#endif
+	{
+		int _w0;
+		int _w1;
 
+		_w0 = static_cast<int>(     (cy * _Splitter._percent) - (_Splitter._Width / 2));
+		_w1 = static_cast<int>(cy - (cy * _Splitter._percent) - (_Splitter._Width / 2));
+
+		::MoveWindow(_WidgetView->_hWnd, 0,                      0, cx, _w0, TRUE);
+		::MoveWindow(_LogView   ->_hWnd, 0, _w0 + _Splitter._Width, cx, _w1, TRUE);
+	}
 
 	//-----------------------------------------------------------------------
 	return 0;
@@ -200,12 +218,13 @@ LRESULT MainFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 
 LRESULT MainFrame::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
-	//return TRUE;
-	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+	return TRUE;
+	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
 LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
+#if 0
 	PAINTSTRUCT ps;
 	HDC hdc;
 	int bkMode;
@@ -222,7 +241,9 @@ LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 
 
 	return 0;
-	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+#endif
+	
+	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
 LRESULT MainFrame::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)

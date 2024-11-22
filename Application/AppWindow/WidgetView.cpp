@@ -78,7 +78,7 @@ void WidgetView::createWindow(HWND hWndParent)
 	LPCWSTR lpszClassName = WidgetView_ClassName;
 	LPCWSTR lpWindowName  = L"Window";
 	DWORD   dwStyle       = ChildWindowStyle;
-	DWORD   dwExStyle     = ChildWindowStyleEx;
+	DWORD   dwExStyle     = WS_EX_CLIENTEDGE;
 	int     X             = CW_USEDEFAULT;
 	int     Y             = CW_USEDEFAULT;
 	int     nWidth        = CW_USEDEFAULT;
