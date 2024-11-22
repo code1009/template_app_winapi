@@ -4,12 +4,12 @@
 //
 #define IDS_APPLICATION                 128
 #define IDI_SMALL                       129
-#define IDR_MAINWINDOW                  130
-#define IDI_MAINWINDOW                  131
-#define IDC_MAINWINDOW                  131
-#define IDS_MAINWINDOW                  132
-#define IDM_ABOUT                       201
-#define IDM_EXIT                        202
+#define IDR_MAINFRAME                   130
+#define IDI_MAINFRAME                   131
+#define IDC_MAINFRAME                   131
+#define IDS_MAINFRAME                   132
+#define IDM_APP_EXIT                    201
+#define IDM_APP_ABOUT                   202
 #define IDD_ABOUTBOX                    301
 
 #define IDC_STATIC                      -1

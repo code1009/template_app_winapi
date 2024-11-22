@@ -8,11 +8,11 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //==============================================================================
-class MainWindow : public Window
+class MainFrame : public Window
 {
 public:
-	MainWindow();
-	virtual ~MainWindow();
+	MainFrame();
+	virtual ~MainFrame();
 
 public:
 	virtual LRESULT onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam) override;
@@ -28,8 +28,11 @@ public:
 	LRESULT onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	void onCommand_Help_About(void);
-	void onCommand_File_Exit(void);
+	void onCommand_App_About(void);
+	void onCommand_App_Exit(void);
+
+public:
+	void onIdle(void);
 };
 
 

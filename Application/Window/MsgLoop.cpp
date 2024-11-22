@@ -19,6 +19,12 @@ MsgLoop::~MsgLoop()
 }
 
 //==============================================================================
+void MsgLoop::addIdleHandler(std::function<void(void)> handler)
+{
+	_idleHandlers.push_back(handler);
+}
+
+//==============================================================================
 void MsgLoop::runMsgLoop(void)
 {
 	//-----------------------------------------------------------------------
@@ -43,5 +49,8 @@ void MsgLoop::runMsgLoop(void)
 
 void MsgLoop::onIdle(void)
 {
-	
+	for (auto& handler : _idleHandlers)
+	{
+		handler();
+	}
 }

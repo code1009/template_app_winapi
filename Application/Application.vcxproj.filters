@@ -33,7 +33,7 @@
     <ClInclude Include="Window\MsgLoop.hpp">
       <Filter>Root\Window</Filter>
     </ClInclude>
-    <ClInclude Include="AppWindow\MainWindow.hpp">
+    <ClInclude Include="AppWindow\MainFrame.hpp">
       <Filter>Root\AppWindow</Filter>
     </ClInclude>
     <ClInclude Include="Window\Application.hpp">
@@ -65,7 +65,7 @@
     <ClCompile Include="Window\MsgLoop.cpp">
       <Filter>Root\Window</Filter>
     </ClCompile>
-    <ClCompile Include="AppWindow\MainWindow.cpp">
+    <ClCompile Include="AppWindow\MainFrame.cpp">
       <Filter>Root\AppWindow</Filter>
     </ClCompile>
     <ClCompile Include="Window\Application.cpp">

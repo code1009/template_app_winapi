@@ -5,7 +5,7 @@
 #include "../Window/WindowClass.hpp"
 #include "../Window/Window.hpp"
 #include "../Resource/Resource.h"
-#include "MainWindow.hpp"
+#include "MainFrame.hpp"
 #include "AboutBoxDialog.hpp"
 
 
@@ -14,7 +14,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //==============================================================================
-constexpr LPCWSTR MainWindow_ClassName = L"xMainWindow";
+constexpr LPCWSTR MainFrame_ClassName = L"xMainFrame";
 
 
 
@@ -22,12 +22,12 @@ constexpr LPCWSTR MainWindow_ClassName = L"xMainWindow";
 
 ////////////////////////////////////////////////////////////////////////////////
 //==============================================================================
-MainWindow::MainWindow()
+MainFrame::MainFrame()
 {
 	WindowClass windowClass;
 
 
-	windowClass.registerWindowClass(MainWindow_ClassName, IDC_MAINWINDOW, IDI_MAINWINDOW, IDI_SMALL);
+	windowClass.registerWindowClass(MainFrame_ClassName, IDC_MAINFRAME, IDI_MAINFRAME, IDI_SMALL);
 
 
 	createWindow();
@@ -37,12 +37,12 @@ MainWindow::MainWindow()
 }
 
 //==============================================================================
-MainWindow::~MainWindow()
+MainFrame::~MainFrame()
 {
 }
 
 //==============================================================================
-LRESULT MainWindow::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -60,14 +60,14 @@ LRESULT MainWindow::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 }
 
 //==============================================================================
-void MainWindow::createWindow(void)
+void MainFrame::createWindow(void)
 {
 	constexpr DWORD FrameWindowStyle = WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS;
 	constexpr DWORD FrameWindowStyleEx = WS_EX_APPWINDOW | WS_EX_WINDOWEDGE;
 
 
 	HWND hWndParent = nullptr;
-	LPCWSTR lpszClassName = MainWindow_ClassName;
+	LPCWSTR lpszClassName = MainFrame_ClassName;
 	LPCWSTR lpWindowName = L"Window";
 	DWORD dwStyle = FrameWindowStyle;
 	DWORD dwExStyle = FrameWindowStyleEx;
@@ -99,11 +99,11 @@ void MainWindow::createWindow(void)
 
 	if (nullptr==hWnd)
 	{
-		throw std::runtime_error("MainWindow::createWindow() failed");
+		throw std::runtime_error("MainFrame::createWindow() failed");
 	}
 }
 
-void MainWindow::destroyWindow(void)
+void MainFrame::destroyWindow(void)
 {
 	if (_hWnd)
 	{
@@ -114,12 +114,12 @@ void MainWindow::destroyWindow(void)
 }
 
 //==============================================================================
-LRESULT MainWindow::onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainWindow::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	::PostQuitMessage(0);
 
@@ -127,20 +127,20 @@ LRESULT MainWindow::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lP
 	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainWindow::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	//destroyWindow();
 
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainWindow::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainWindow::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	PAINTSTRUCT ps;
 	
@@ -154,18 +154,18 @@ LRESULT MainWindow::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPar
 	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainWindow::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	int id = LOWORD(wParam);
 
 	switch (id)
 	{
-	case IDM_ABOUT:
-		onCommand_Help_About();
+	case IDM_APP_ABOUT:
+		onCommand_App_About();
 		return 0;
 
-	case IDM_EXIT:
-		onCommand_File_Exit();
+	case IDM_APP_EXIT:
+		onCommand_App_Exit();
 		return 0;
 
 	default:
@@ -175,7 +175,7 @@ LRESULT MainWindow::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lP
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-void MainWindow::onCommand_Help_About(void)
+void MainFrame::onCommand_App_About(void)
 {
 	AboutBoxDialog aboutBoxDialog;
 	INT_PTR rv;
@@ -199,7 +199,13 @@ void MainWindow::onCommand_Help_About(void)
 	}
 }
 
-void MainWindow::onCommand_File_Exit(void)
+void MainFrame::onCommand_App_Exit(void)
 {
 	destroyWindow();
+}
+
+//==============================================================================
+void MainFrame::onIdle(void)
+{
+
 }

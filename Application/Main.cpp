@@ -13,7 +13,7 @@
 #include "Window/Window.hpp"
 #include "Window/MsgLoop.hpp"
 
-#include "AppWindow/MainWindow.hpp"
+#include "AppWindow/MainFrame.hpp"
 
 
 
@@ -21,14 +21,16 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //==============================================================================
-void RunWindow()
+void RunWindow(void)
 {
-	MainWindow mainWindow;
+	MainFrame mainFrame;
 
 
 
 	MsgLoop msgLoop;
 
+
+	msgLoop.addIdleHandler([&]() { mainFrame.onIdle(); });
 
 	msgLoop.runMsgLoop();
 }
