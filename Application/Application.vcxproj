@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AppWindow\AboutBox.hpp" />
+    <ClInclude Include="AppWindow\LogView.hpp" />
     <ClInclude Include="AppWindow\MainFrame.hpp" />
     <ClInclude Include="AppWindow\pch.hpp" />
     <ClInclude Include="AppWindow\View.hpp" />
@@ -152,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AppWindow\AboutBox.cpp" />
+    <ClCompile Include="AppWindow\LogView.cpp" />
     <ClCompile Include="AppWindow\MainFrame.cpp" />
     <ClCompile Include="AppWindow\View.cpp" />
     <ClCompile Include="AppWindow\ViewRender.cpp" />

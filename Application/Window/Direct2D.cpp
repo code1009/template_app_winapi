@@ -19,18 +19,35 @@
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
 ID2D1Factory* Direct2D::_pFactory = nullptr;
+IDWriteFactory* Direct2D::_pDWriteFactory = nullptr;
 
 //===========================================================================
 bool Direct2D::newFactory(void)
 {
+	//-----------------------------------------------------------------------
 	HRESULT hr;
 
 
+	//-----------------------------------------------------------------------
 	hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &_pFactory);
 	if (FAILED(hr))
 	{
 		return false;
 	}
+
+
+	//-----------------------------------------------------------------------
+	hr = DWriteCreateFactory(
+		DWRITE_FACTORY_TYPE_SHARED,
+		__uuidof(IDWriteFactory),
+		reinterpret_cast<IUnknown**>(&_pDWriteFactory)
+	);
+	if (FAILED(hr))
+	{
+		deleteFactory();
+		return false;
+	}
+
 
 	return true;
 }
@@ -41,6 +58,13 @@ void Direct2D::deleteFactory(void)
 	{
 		_pFactory->Release();
 		_pFactory = nullptr;
+	}
+
+
+	if (_pDWriteFactory)
+	{
+		_pDWriteFactory->Release();
+		_pDWriteFactory = nullptr;
 	}
 }
 

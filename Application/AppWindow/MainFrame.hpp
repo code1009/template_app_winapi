@@ -12,6 +12,7 @@ class MainFrame : public Window
 {
 public:
 	std::unique_ptr<View> _View;
+	std::unique_ptr<LogView> _LogView;
 
 public:
 	MainFrame();

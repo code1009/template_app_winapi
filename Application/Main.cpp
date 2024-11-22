@@ -16,6 +16,7 @@
 
 #include "AppWindow/ViewRender.hpp"
 #include "AppWindow/View.hpp"
+#include "AppWindow/LogView.hpp"
 #include "AppWindow/MainFrame.hpp"
 
 

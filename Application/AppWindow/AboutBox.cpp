@@ -81,7 +81,6 @@ LRESULT AboutBox::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 
 LRESULT AboutBox::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
-	//return TRUE;
 	return FALSE;
 }
 

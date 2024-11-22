@@ -44,22 +44,6 @@ bool ViewRender::createDeviceResources(HWND hWnd)
 	//-----------------------------------------------------------------------
 	if (!_pTextBrush)
 	{
-		IDWriteFactory* pDWriteFactory = nullptr;
-
-
-		hr = DWriteCreateFactory(
-			DWRITE_FACTORY_TYPE_SHARED,
-			__uuidof(IDWriteFactory),
-			reinterpret_cast<IUnknown**>(&pDWriteFactory)
-		);
-		if (FAILED(hr))
-		{
-			destroyDeviceResources();
-			return false;
-		}
-
-
-
 		hr = _pRenderTarget->CreateSolidColorBrush(
 			D2D1::ColorF(D2D1::ColorF::Black),
 			&_pTextBrush
@@ -71,7 +55,7 @@ bool ViewRender::createDeviceResources(HWND hWnd)
 		}
 
 
-		hr = pDWriteFactory->CreateTextFormat(
+		hr = _pDWriteFactory->CreateTextFormat(
 			//L"Arial",
 			L"돋움",
 			//L"FixedSys",
@@ -89,10 +73,6 @@ bool ViewRender::createDeviceResources(HWND hWnd)
 			destroyDeviceResources();
 			return false;
 		}
-
-
-		pDWriteFactory->Release();
-		pDWriteFactory = nullptr;
 	}
 
 

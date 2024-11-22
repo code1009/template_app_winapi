@@ -12,6 +12,7 @@ class Direct2D
 {
 public:
 	static ID2D1Factory* _pFactory;
+	static IDWriteFactory* _pDWriteFactory;
 
 public:
 	static bool newFactory(void);

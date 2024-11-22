@@ -9,6 +9,7 @@
 
 #include "ViewRender.hpp"
 #include "View.hpp"
+#include "LogView.hpp"
 #include "MainFrame.hpp"
 #include "AboutBox.hpp"
 
@@ -45,6 +46,7 @@ MainFrame::MainFrame()
 
 	//-----------------------------------------------------------------------
 	_View = std::make_unique<View>(_hWnd);
+	_LogView = std::make_unique<LogView>(_hWnd);
 
 
 	//-----------------------------------------------------------------------
@@ -158,13 +160,37 @@ LRESULT MainFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 	//-----------------------------------------------------------------------
 	RECT rect;
 
+
 	GetClientRect(hWnd, &rect);
 
 
 	//-----------------------------------------------------------------------
-	if (_View.get())
+	UINT cx;
+	UINT cy;
+
+
+	cx = static_cast<UINT>(rect.right - rect.left);
+	cy = static_cast<UINT>(rect.bottom - rect.top);
+
+
+	//-----------------------------------------------------------------------
+	if (_View.get() && _LogView.get())
 	{
-		::MoveWindow(_View->_hWnd, 0, 0, rect.right, rect.bottom, TRUE);
+		constexpr int logViewHeight = 200;
+
+
+		if (cy > logViewHeight)
+		{
+			::MoveWindow(_View->_hWnd, 0, 0, cx, cy - logViewHeight, TRUE);
+
+			::MoveWindow(_LogView->_hWnd, 0, cy - logViewHeight, cx, logViewHeight, TRUE);
+		}
+		else
+		{
+			::MoveWindow(_View->_hWnd, 0, 0, 0, 0, TRUE);
+
+			::MoveWindow(_LogView->_hWnd, 0, 0, cx, cy, TRUE);
+		}
 	}
 
 
@@ -203,6 +229,7 @@ LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 LRESULT MainFrame::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	int id = LOWORD(wParam);
+
 
 	switch (id)
 	{

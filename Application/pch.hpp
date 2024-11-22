@@ -26,6 +26,7 @@
 // Windows 헤더 파일
 #include <Windows.h>
 #include <windowsx.h>
+#include <commctrl.h>
 
 #include <d2d1.h>
 #include <d2d1helper.h>

@@ -150,15 +150,17 @@ LRESULT View::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 
 
 	//-----------------------------------------------------------------------
+	UINT cx;
+	UINT cy;
+
+
+	cx = static_cast<UINT>(rect.right - rect.left);
+	cy = static_cast<UINT>(rect.bottom - rect.top);
+
+
+	//-----------------------------------------------------------------------
 	if (_ViewRender.get())
 	{
-		UINT cx;
-		UINT cy;
-
-
-		cx = static_cast<UINT>(rect.right  - rect.left);
-		cy = static_cast<UINT>(rect.bottom - rect.top );
-
 		_ViewRender->resize(_hWnd, cx, cy);
 	}
 
