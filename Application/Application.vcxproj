@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AppWindow\AboutBoxDialog.hpp" />
     <ClInclude Include="AppWindow\MainWindow.hpp" />
     <ClInclude Include="AppWindow\pch.hpp" />
     <ClInclude Include="pch.hpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Window\MsgLoop.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AppWindow\AboutBoxDialog.cpp" />
     <ClCompile Include="AppWindow\MainWindow.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="pch.cpp">

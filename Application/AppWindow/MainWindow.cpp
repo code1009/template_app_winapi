@@ -6,6 +6,7 @@
 #include "../Window/Window.hpp"
 #include "../Resource/Resource.h"
 #include "MainWindow.hpp"
+#include "AboutBoxDialog.hpp"
 
 
 
@@ -26,7 +27,7 @@ MainWindow::MainWindow()
 	WindowClass windowClass;
 
 
-	windowClass.registerWindowClass(MainWindow_ClassName, IDI_MAINWINDOW);
+	windowClass.registerWindowClass(MainWindow_ClassName, IDC_MAINWINDOW, IDI_MAINWINDOW, IDI_SMALL);
 
 
 	createWindow();
@@ -155,5 +156,50 @@ LRESULT MainWindow::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPar
 
 LRESULT MainWindow::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
+	int id = LOWORD(wParam);
+
+	switch (id)
+	{
+	case IDM_ABOUT:
+		onCommand_Help_About();
+		return 0;
+
+	case IDM_EXIT:
+		onCommand_File_Exit();
+		return 0;
+
+	default:
+		break;
+	}
+
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+}
+
+void MainWindow::onCommand_Help_About(void)
+{
+	AboutBoxDialog aboutBoxDialog;
+	INT_PTR rv;
+
+	rv = DialogBoxParamW(
+		ApplicationGet()->_hInstance, MAKEINTRESOURCE(IDD_ABOUTBOX), 
+		_hWnd, 
+		DialogProc,
+		reinterpret_cast<LPARAM>(&aboutBoxDialog)
+	);
+	switch (rv)
+	{
+	case IDOK:
+		break;
+
+	case IDCANCEL:
+		break;
+
+	default:
+		break;
+	}
+}
+
+void MainWindow::onCommand_File_Exit(void)
+{
+	destroyWindow();
 }

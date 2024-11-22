@@ -72,11 +72,11 @@ LRESULT __stdcall WindowProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPa
 
 ////////////////////////////////////////////////////////////////////////////////
 //==============================================================================
-LRESULT __stdcall WindowDialogProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR __stdcall DialogProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (WM_INITDIALOG == uMsg)
 	{
-		auto userData = reinterpret_cast<CREATESTRUCTW*>(lParam)->lpCreateParams;
+		auto userData = reinterpret_cast<Window*>(lParam);
 
 		::SetWindowLongPtrW(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(userData));
 
