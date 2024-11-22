@@ -45,7 +45,7 @@
     <ClInclude Include="targetver.h">
       <Filter>Root</Filter>
     </ClInclude>
-    <ClInclude Include="AppWindow\AboutBoxDialog.hpp">
+    <ClInclude Include="AppWindow\AboutBox.hpp">
       <Filter>Root\AppWindow</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,7 +71,7 @@
     <ClCompile Include="Window\Application.cpp">
       <Filter>Root\Window</Filter>
     </ClCompile>
-    <ClCompile Include="AppWindow\AboutBoxDialog.cpp">
+    <ClCompile Include="AppWindow\AboutBox.cpp">
       <Filter>Root\AppWindow</Filter>
     </ClCompile>
   </ItemGroup>

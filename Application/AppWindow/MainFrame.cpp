@@ -6,7 +6,7 @@
 #include "../Window/Window.hpp"
 #include "../Resource/Resource.h"
 #include "MainFrame.hpp"
-#include "AboutBoxDialog.hpp"
+#include "AboutBox.hpp"
 
 
 
@@ -46,12 +46,13 @@ LRESULT MainFrame::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
-	case WM_CREATE:  return onCreate (hWnd, uMsg, wParam, lParam);
-	case WM_DESTROY: return onDestroy(hWnd, uMsg, wParam, lParam);
-	case WM_CLOSE:   return onClose  (hWnd, uMsg, wParam, lParam);
-	case WM_SIZE:    return onSize   (hWnd, uMsg, wParam, lParam);
-	case WM_PAINT:   return onPaint  (hWnd, uMsg, wParam, lParam);
-	case WM_COMMAND: return onCommand(hWnd, uMsg, wParam, lParam);
+	case WM_CREATE:     return onCreate    (hWnd, uMsg, wParam, lParam);
+	case WM_DESTROY:    return onDestroy   (hWnd, uMsg, wParam, lParam);
+	case WM_CLOSE:      return onClose     (hWnd, uMsg, wParam, lParam);
+	case WM_SIZE:       return onSize      (hWnd, uMsg, wParam, lParam);
+	case WM_ERASEBKGND: return onEraseBkGnd(hWnd, uMsg, wParam, lParam);
+	case WM_PAINT:      return onPaint     (hWnd, uMsg, wParam, lParam);
+	case WM_COMMAND:    return onCommand   (hWnd, uMsg, wParam, lParam);
 	default:
 		break;
 	}
@@ -140,14 +141,27 @@ LRESULT MainFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
+LRESULT MainFrame::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	//return 1;
+	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+}
+
 LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	PAINTSTRUCT ps;
-	
-	
-	HDC hdc = BeginPaint(hWnd, &ps);
-	
-	EndPaint(hWnd, &ps);
+	HDC hdc;
+	int bkMode;
+
+
+	hdc = ::BeginPaint(hWnd, &ps);
+
+	bkMode = ::GetBkMode(hdc);
+	::SetBkMode(hdc, TRANSPARENT);
+	::TextOutW(hdc, 10, 10, L"MainFrame", 9);
+	::SetBkMode(hdc, bkMode);
+
+	::EndPaint(hWnd, &ps);
 
 
 	return 0;
@@ -177,14 +191,15 @@ LRESULT MainFrame::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPa
 
 void MainFrame::onCommand_App_About(void)
 {
-	AboutBoxDialog aboutBoxDialog;
+	AboutBox aboutBox;
 	INT_PTR rv;
+
 
 	rv = DialogBoxParamW(
 		ApplicationGet()->_hInstance, MAKEINTRESOURCE(IDD_ABOUTBOX), 
 		_hWnd, 
 		DialogProc,
-		reinterpret_cast<LPARAM>(&aboutBoxDialog)
+		reinterpret_cast<LPARAM>(&aboutBox)
 	);
 	switch (rv)
 	{
@@ -207,5 +222,6 @@ void MainFrame::onCommand_App_Exit(void)
 //==============================================================================
 void MainFrame::onIdle(void)
 {
-
+//	OutputDebugStringW(L"MainFrame::onIdle()\r\n");
+//	Sleep(10);
 }

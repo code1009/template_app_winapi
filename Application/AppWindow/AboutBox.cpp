@@ -5,7 +5,7 @@
 #include "../Window/WindowClass.hpp"
 #include "../Window/Window.hpp"
 #include "../Resource/Resource.h"
-#include "AboutBoxDialog.hpp"
+#include "AboutBox.hpp"
 
 
 
@@ -13,7 +13,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //==============================================================================
-constexpr LPCWSTR AboutBoxDialog_ClassName = L"xAboutBoxDialog";
+constexpr LPCWSTR AboutBox_ClassName = L"xAboutBox";
 
 
 
@@ -21,17 +21,17 @@ constexpr LPCWSTR AboutBoxDialog_ClassName = L"xAboutBoxDialog";
 
 ////////////////////////////////////////////////////////////////////////////////
 //==============================================================================
-AboutBoxDialog::AboutBoxDialog()
+AboutBox::AboutBox()
 {
 }
 
 //==============================================================================
-AboutBoxDialog::~AboutBoxDialog()
+AboutBox::~AboutBox()
 {
 }
 
 //==============================================================================
-LRESULT AboutBoxDialog::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -49,7 +49,7 @@ LRESULT AboutBoxDialog::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lP
 }
 
 //==============================================================================
-LRESULT AboutBoxDialog::onInitDialog(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onInitDialog(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	/*
 	일반적으로 대화 상자 프로시저는 메시지를 처리한 경우 TRUE 를 반환하고,
@@ -60,26 +60,24 @@ LRESULT AboutBoxDialog::onInitDialog(HWND hWnd, uint32_t uMsg, WPARAM wParam, LP
 	return TRUE;
 }
 
-LRESULT AboutBoxDialog::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return FALSE;
 }
 
-LRESULT AboutBoxDialog::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return FALSE;
 }
 
-LRESULT AboutBoxDialog::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return FALSE;
 }
 
-LRESULT AboutBoxDialog::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
-	PAINTSTRUCT ps;
-	
-	
+	PAINTSTRUCT ps;	
 	HDC hdc;
 	int bkMode;
 
@@ -88,7 +86,7 @@ LRESULT AboutBoxDialog::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM 
 
 	bkMode = ::GetBkMode(hdc);
 	::SetBkMode(hdc, TRANSPARENT);
-	::TextOutW(hdc, 10, 10, L"AboutBoxDialog", 14);
+	::TextOutW(hdc, 10, 10, L"AboutBox", 14);
 	::SetBkMode(hdc, bkMode);
 
 	::EndPaint(hWnd, &ps);
@@ -97,7 +95,7 @@ LRESULT AboutBoxDialog::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM 
 	return TRUE;
 }
 
-LRESULT AboutBoxDialog::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	int id = LOWORD(wParam);
 
@@ -119,12 +117,12 @@ LRESULT AboutBoxDialog::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARA
 	return FALSE;
 }
 
-void AboutBoxDialog::onCommand_OK(void)
+void AboutBox::onCommand_OK(void)
 {
 	::EndDialog(_hWnd, IDOK);
 }
 
-void AboutBoxDialog::onCommand_Cancel(void)
+void AboutBox::onCommand_Cancel(void)
 {
 	::EndDialog(_hWnd, IDCANCEL);
 }

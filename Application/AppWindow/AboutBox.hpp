@@ -8,11 +8,11 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //==============================================================================
-class AboutBoxDialog : public Window
+class AboutBox : public Window
 {
 public:
-	AboutBoxDialog();
-	virtual ~AboutBoxDialog();
+	AboutBox();
+	virtual ~AboutBox();
 
 public:
 	virtual LRESULT onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam) override;
