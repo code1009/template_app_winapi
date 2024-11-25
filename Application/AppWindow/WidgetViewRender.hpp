@@ -11,16 +11,17 @@
 class WidgetViewRender : public Direct2D
 {
 public:
-	ID2D1SolidColorBrush* _pLightSlateGrayBrush{ nullptr };
-	ID2D1SolidColorBrush* _pCornflowerBlueBrush{ nullptr };
-	
-	IDWriteTextFormat*    _pTextFormat{ nullptr };
 	IDWriteTextLayout*    _pTextLayout{ nullptr };
+	IDWriteTextFormat*    _pTextFormat{ nullptr };
 	ID2D1SolidColorBrush* _pTextBrush { nullptr };
 
-	std::chrono::time_point<std::chrono::steady_clock> _lastTime;
-	std::int64_t                                       _frameCount{ 0 };
-	float                                              _fps{ 0.0f };
+	std::chrono::time_point<std::chrono::steady_clock> _LastTime;
+	std::int64_t                                       _FrameCount{ 0 };
+	float                                              _Fps{ 0.0f };
+
+public:
+	ID2D1SolidColorBrush* _pLightSlateGrayBrush{ nullptr };
+	ID2D1SolidColorBrush* _pCornflowerBlueBrush{ nullptr };
 
 public:
 	WidgetViewRender();

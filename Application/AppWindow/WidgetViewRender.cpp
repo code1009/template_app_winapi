@@ -16,7 +16,7 @@
 //===========================================================================
 WidgetViewRender::WidgetViewRender()
 {
-	_lastTime = std::chrono::steady_clock::now();
+	_LastTime = std::chrono::steady_clock::now();
 }
 
 //===========================================================================
@@ -39,9 +39,6 @@ bool WidgetViewRender::createDeviceResources(HWND hWnd)
 	HRESULT hr; 
 	
 	
-	hr = S_OK;
-
-
 	//-----------------------------------------------------------------------
 	if (!_pTextBrush)
 	{
@@ -54,8 +51,10 @@ bool WidgetViewRender::createDeviceResources(HWND hWnd)
 			destroyDeviceResources();
 			return false;
 		}
+	}
 
-
+	if (!_pTextFormat)
+	{
 		hr = _pDWriteFactory->CreateTextFormat(
 			//L"Arial",
 			L"돋움",
@@ -90,8 +89,10 @@ bool WidgetViewRender::createDeviceResources(HWND hWnd)
 			destroyDeviceResources();
 			return false;
 		}
+	}
 
-
+	if (!_pCornflowerBlueBrush)
+	{
 		// Create a blue brush.
 		hr = _pRenderTarget->CreateSolidColorBrush(
 			D2D1::ColorF(D2D1::ColorF::CornflowerBlue),
@@ -145,15 +146,15 @@ void WidgetViewRender::destroyDeviceResources(void)
 void WidgetViewRender::calculateFPS(void)
 {
 	auto currentTime = std::chrono::steady_clock::now();
-	std::chrono::duration<float> elapsed = currentTime - _lastTime;
-	_frameCount++;
+	std::chrono::duration<float> elapsed = currentTime - _LastTime;
+	_FrameCount++;
 
 
 	if (elapsed.count() >= 1.0f)
 	{
-		_fps = _frameCount / elapsed.count();
-		_frameCount = 0;
-		_lastTime = currentTime;
+		_Fps = _FrameCount / elapsed.count();
+		_FrameCount = 0;
+		_LastTime = currentTime;
 	}
 }
 
@@ -193,7 +194,7 @@ void WidgetViewRender::drawStatus(void)
 
 
 	swprintf_s(frameText, L"%03d frame",
-		static_cast<int>(_frameCount)
+		static_cast<int>(_FrameCount)
 	);
 
 
@@ -202,7 +203,7 @@ void WidgetViewRender::drawStatus(void)
 
 
 	swprintf_s(fpsText, L"%03d fps",
-		static_cast<int>(_fps)
+		static_cast<int>(_Fps)
 	);
 
 
