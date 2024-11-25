@@ -51,8 +51,8 @@ void LogListViewCtrl::createWindow(HWND hWndParent)
 	//-----------------------------------------------------------------------
 	LPCWSTR lpszClassName = WC_LISTVIEW;
 	LPCWSTR lpWindowName  = L"Window";
-	DWORD   dwStyle       = WS_CHILD | WS_VISIBLE;
-	DWORD   dwExStyle     = 0;
+	DWORD   dwStyle       = ControlWindowStyle;
+	DWORD   dwExStyle     = ControlWindowStyleEx;
 	int     X             = 0;
 	int     Y             = 0;
 	int     nWidth        = 0;
@@ -567,11 +567,6 @@ LRESULT LogView::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 
 LRESULT LogView::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
-	//-----------------------------------------------------------------------
-	SIZE size{ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
-	UINT type{ (UINT)wParam };
-
-
 	//-----------------------------------------------------------------------
 	RECT rect;
 

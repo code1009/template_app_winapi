@@ -144,11 +144,6 @@ LRESULT WidgetView::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPar
 LRESULT WidgetView::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
 	//-----------------------------------------------------------------------
-	SIZE size{ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
-	UINT type{ (UINT)wParam };
-
-
-	//-----------------------------------------------------------------------
 	RECT rect;
 
 	GetClientRect(hWnd, &rect);
