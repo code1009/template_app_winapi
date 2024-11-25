@@ -558,6 +558,7 @@ LRESULT MainFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 
 LRESULT MainFrame::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
+	_Splitter.Draw(hWnd);
 	return TRUE;
 	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
@@ -602,9 +603,16 @@ LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 	return 0;
 #endif
 
-	_Splitter.Draw(hWnd);
+#if 1
+	LRESULT rv;
 
-	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+
+	rv = ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+
+	//_Splitter.Draw(hWnd);
+
+	return  rv;
+#endif
 }
 
 LRESULT MainFrame::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
