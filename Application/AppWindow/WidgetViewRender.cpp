@@ -143,6 +143,18 @@ void WidgetViewRender::destroyDeviceResources(void)
 	Direct2D::destroyDeviceResources();
 }
 
+//===========================================================================
+void WidgetViewRender::on_render(void)
+{
+	calculateFPS();
+
+	_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
+	drawContents();
+
+	drawStatus();
+}
+
+//===========================================================================
 void WidgetViewRender::calculateFPS(void)
 {
 	auto currentTime = std::chrono::steady_clock::now();
@@ -156,16 +168,6 @@ void WidgetViewRender::calculateFPS(void)
 		_FrameCount = 0;
 		_LastTime = currentTime;
 	}
-}
-
-void WidgetViewRender::on_render(void)
-{
-	calculateFPS();
-
-	_pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
-	drawContents();
-
-	drawStatus();
 }
 
 void WidgetViewRender::drawStatus(void)
@@ -225,6 +227,7 @@ void WidgetViewRender::drawStatus(void)
 	);
 }
 
+//===========================================================================
 void WidgetViewRender::drawContents(void)
 {
 	float zoom = 1;

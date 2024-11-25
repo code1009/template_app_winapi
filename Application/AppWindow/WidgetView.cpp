@@ -64,6 +64,11 @@ LRESULT WidgetView::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 	case WM_ERASEBKGND: return onEraseBkGnd(hWnd, uMsg, wParam, lParam);
 	case WM_PAINT:      return onPaint     (hWnd, uMsg, wParam, lParam);
 	case WM_COMMAND:    return onCommand   (hWnd, uMsg, wParam, lParam);
+
+	case WM_HSCROLL:        return OnHScroll(hWnd, uMsg, wParam, lParam);
+	case WM_VSCROLL:        return OnVScroll(hWnd, uMsg, wParam, lParam);
+	case WM_MOUSEWHEEL:     return OnMouseWheel(hWnd, uMsg, wParam, lParam);
+
 	default:
 		break;
 	}
@@ -192,6 +197,101 @@ LRESULT WidgetView::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPar
 
 LRESULT WidgetView::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 {
+	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+}
+
+//===========================================================================
+LRESULT WidgetView::OnHScroll(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	UINT nSBCode = (int)LOWORD(wParam);
+	UINT nPos = (short)(HIWORD(wParam));
+	HWND pScrollBar = (HWND)lParam;
+
+
+	//_Render->hscroll(nSBCode);
+	OutputDebugStringW(L"WidgetView::OnHScroll()\r\n");
+
+	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+}
+
+LRESULT WidgetView::OnVScroll(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	UINT nSBCode = (int)LOWORD(wParam);
+	UINT nPos = (short)(HIWORD(wParam));
+	HWND pScrollBar = (HWND)lParam;
+
+
+	//_Render->vscroll(nSBCode);
+	OutputDebugStringW(L"WidgetView::OnVScroll()\r\n");
+
+
+	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+}
+
+//===========================================================================
+LRESULT WidgetView::OnMouseWheel(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+{
+	UINT  nFlags = (UINT)LOWORD(wParam);
+	short zDelta = (short)HIWORD(wParam);
+	POINT pt = { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
+
+
+	bool scale = false;
+
+
+	switch (nFlags)
+	{
+	case MK_CONTROL:
+		scale = true;
+		break;
+
+	case MK_LBUTTON:
+	case MK_RBUTTON:
+		break;
+	case MK_MBUTTON:
+		break;
+
+	case MK_SHIFT:
+		break;
+
+	case MK_XBUTTON1:
+	case MK_XBUTTON2:
+		break;
+
+	default:
+		break;
+	}
+
+
+	if (scale)
+	{
+		if (zDelta > 0)
+		{
+			OutputDebugStringW(L"WidgetView::OnMouseWheel(): zoomin\r\n");
+			//_Render->zoom(true);
+		}
+		else
+		{
+
+			//_Render->zoom(false);
+			OutputDebugStringW(L"WidgetView::OnMouseWheel(): zoomout\r\n");
+		}
+	}
+	else
+	{
+		if (zDelta > 0)
+		{
+			//_Render->vscroll(SB_LINEUP);
+			OutputDebugStringW(L"WidgetView::OnMouseWheel(): SB_LINEUP\r\n");
+		}
+		else
+		{
+			//_Render->vscroll(SB_LINEDOWN);
+			OutputDebugStringW(L"WidgetView::OnMouseWheel(): SB_LINEDOWN\r\n");
+		}
+	}
+
+
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 

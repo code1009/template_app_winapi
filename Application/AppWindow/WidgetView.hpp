@@ -35,6 +35,10 @@ public:
 	LRESULT onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
 
+	LRESULT OnHScroll(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnVScroll(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnMouseWheel(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	
 public:
 	void onIdle(void);
 };
