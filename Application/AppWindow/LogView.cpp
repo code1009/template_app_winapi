@@ -505,12 +505,15 @@ void LogView::createWindow(HWND hWndParent)
 	LPCWSTR lpszClassName = LogView_ClassName;
 	LPCWSTR lpWindowName  = L"Window";
 	DWORD   dwStyle       = ChildWindowStyle;
-	DWORD   dwExStyle     = WS_EX_CLIENTEDGE;
+	DWORD   dwExStyle     = ChildWindowStyleEx;
 	int     X             = CW_USEDEFAULT;
 	int     Y             = CW_USEDEFAULT;
 	int     nWidth        = CW_USEDEFAULT;
 	int     nHeight       = CW_USEDEFAULT;
 	HMENU   hMenu         = nullptr;
+
+
+	dwExStyle |= WS_EX_CLIENTEDGE;
 
 
 	//-----------------------------------------------------------------------

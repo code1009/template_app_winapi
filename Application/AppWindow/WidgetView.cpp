@@ -78,7 +78,7 @@ void WidgetView::createWindow(HWND hWndParent)
 	LPCWSTR lpszClassName = WidgetView_ClassName;
 	LPCWSTR lpWindowName  = L"Window";
 	DWORD   dwStyle       = ChildWindowStyle;
-	DWORD   dwExStyle     = WS_EX_CLIENTEDGE;
+	DWORD   dwExStyle     = ChildWindowStyleEx;
 	int     X             = CW_USEDEFAULT;
 	int     Y             = CW_USEDEFAULT;
 	int     nWidth        = CW_USEDEFAULT;
@@ -88,6 +88,8 @@ void WidgetView::createWindow(HWND hWndParent)
 
 	dwStyle |= WS_VSCROLL;
 	dwStyle |= WS_HSCROLL;
+
+	dwExStyle |= WS_EX_CLIENTEDGE;
 
 
 	//-----------------------------------------------------------------------

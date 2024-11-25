@@ -23,6 +23,7 @@ VSplitter::VSplitter()
 {
 	_Color = GetSysColor(COLOR_BTNFACE);
 	_Percent = 0.8;
+	_OldPos = -1;
 }
 
 void VSplitter::Draw(HWND hWnd)
@@ -31,11 +32,11 @@ void VSplitter::Draw(HWND hWnd)
 	GetClientRect(hWnd, &rect);
 
 
-	const int maxValue = rect.bottom;
+	const int maxPos = rect.bottom;
 
 
-	const int curValue = static_cast<int>(maxValue * _Percent);
-	Draw(hWnd, curValue);
+	const int pos = static_cast<int>(maxPos * _Percent);
+	Draw(hWnd, pos);
 }
 
 void VSplitter::Draw(HWND hWnd, int curPos)
@@ -155,9 +156,9 @@ void VSplitter::onMouseMove(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPar
 	GetClientRect(hWnd, &rect);
 
 
-	const int posValue = GET_Y_LPARAM(lParam);
-	const int maxValue = rect.bottom;
-	_Percent = static_cast<double>(posValue) / static_cast<double>(maxValue);
+	const int curPos = GET_Y_LPARAM(lParam);
+	const int maxPos = rect.bottom;
+	_Percent = static_cast<double>(curPos) / static_cast<double>(maxPos);
 
 
 	if (_Percent < 0.1)
@@ -170,16 +171,16 @@ void VSplitter::onMouseMove(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPar
 	}
 
 
-	const int curValue = static_cast<int>(maxValue * _Percent);
-	if (_OldPos != curValue)
+	const int pos = static_cast<int>(maxPos * _Percent);
+	if (_OldPos != pos)
 	{
 		if (_OldPos > 0)
 		{
 			Draw(hWnd, _OldPos);
 		}
 
-		Draw(hWnd, curValue);
-		_OldPos = curValue;
+		Draw(hWnd, pos);
+		_OldPos = pos;
 	}
 
 
@@ -196,6 +197,7 @@ HSplitter::HSplitter()
 {
 	_Color = GetSysColor(COLOR_BTNFACE);
 	_Percent = 0.8;
+	_OldPos = -1;
 }
 
 void HSplitter::Draw(HWND hWnd)
@@ -204,11 +206,11 @@ void HSplitter::Draw(HWND hWnd)
 	GetClientRect(hWnd, &rect);
 
 
-	const int maxValue = rect.right;
+	const int maxPos = rect.right;
 
 
-	const int curValue = static_cast<int>(maxValue * _Percent);
-	Draw(hWnd, curValue);
+	const int pos = static_cast<int>(maxPos * _Percent);
+	Draw(hWnd, pos);
 }
 
 void HSplitter::Draw(HWND hWnd, int curPos)
@@ -328,9 +330,9 @@ void HSplitter::onMouseMove(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPar
 	GetClientRect(hWnd, &rect);
 
 
-	const int posValue = GET_X_LPARAM(lParam);
-	const int maxValue = rect.right;
-	_Percent = static_cast<double>(posValue) / static_cast<double>(maxValue);
+	const int curPos = GET_X_LPARAM(lParam);
+	const int maxPos = rect.right;
+	_Percent = static_cast<double>(curPos) / static_cast<double>(maxPos);
 
 
 	if (_Percent < 0.1)
@@ -343,16 +345,16 @@ void HSplitter::onMouseMove(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPar
 	}
 
 
-	const int curValue = static_cast<int>(maxValue * _Percent);
-	if (_OldPos != curValue)
+	const int pos = static_cast<int>(maxPos * _Percent);
+	if (_OldPos != pos)
 	{
 		if (_OldPos > 0)
 		{
 			Draw(hWnd, _OldPos);
 		}
 
-		Draw(hWnd, curValue);
-		_OldPos = curValue;
+		Draw(hWnd, pos);
+		_OldPos = pos;
 	}
 
 
@@ -438,13 +440,16 @@ void MainFrame::createWindow(void)
 	HWND    hWndParent    = nullptr;
 	LPCWSTR lpszClassName = MainFrame_ClassName;
 	LPCWSTR lpWindowName  = L"Window";
-	DWORD   dwStyle       = WS_OVERLAPPEDWINDOW; // FrameWindowStyle;
+	DWORD   dwStyle       = FrameWindowStyle;
 	DWORD   dwExStyle     = FrameWindowStyleEx;
 	int     X             = CW_USEDEFAULT;
 	int     Y             = CW_USEDEFAULT;
 	int     nWidth        = CW_USEDEFAULT;
 	int     nHeight       = CW_USEDEFAULT;
 	HMENU   hMenu         = nullptr;
+
+
+	dwStyle = WS_OVERLAPPEDWINDOW;
 
 
 	//-----------------------------------------------------------------------
@@ -560,7 +565,7 @@ LRESULT MainFrame::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM 
 {
 	_Splitter.Draw(hWnd);
 	return TRUE;
-	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
+//	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
 LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
@@ -604,7 +609,7 @@ LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 #endif
 
 #if 1
-	LRESULT rv;
+	LRESULT rv = 0;
 
 
 	rv = ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
