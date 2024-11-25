@@ -21,6 +21,7 @@ public:
 	VSplitter();
 
 public:
+	void Draw(HWND hWnd);
 	void Draw(HWND hWnd, int curPos);
 	void UpdateLayout(HWND hWnd, HWND hFirstWnd, HWND hSecondWnd);
 
@@ -49,6 +50,7 @@ public:
 	HSplitter();
 
 public:
+	void Draw(HWND hWnd);
 	void Draw(HWND hWnd, int curPos);
 	void UpdateLayout(HWND hWnd, HWND hFirstWnd, HWND hSecondWnd);
 

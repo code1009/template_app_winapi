@@ -25,6 +25,19 @@ VSplitter::VSplitter()
 	_Percent = 0.8;
 }
 
+void VSplitter::Draw(HWND hWnd)
+{
+	RECT rect;
+	GetClientRect(hWnd, &rect);
+
+
+	const int maxValue = rect.bottom;
+
+
+	const int curValue = static_cast<int>(maxValue * _Percent);
+	Draw(hWnd, curValue);
+}
+
 void VSplitter::Draw(HWND hWnd, int curPos)
 {
 	const HDC hdc = GetDC(hWnd);
@@ -183,6 +196,19 @@ HSplitter::HSplitter()
 {
 	_Color = GetSysColor(COLOR_BTNFACE);
 	_Percent = 0.8;
+}
+
+void HSplitter::Draw(HWND hWnd)
+{
+	RECT rect;
+	GetClientRect(hWnd, &rect);
+
+
+	const int maxValue = rect.right;
+
+
+	const int curValue = static_cast<int>(maxValue * _Percent);
+	Draw(hWnd, curValue);
 }
 
 void HSplitter::Draw(HWND hWnd, int curPos)
@@ -575,7 +601,9 @@ LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 
 	return 0;
 #endif
-	
+
+	_Splitter.Draw(hWnd);
+
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
