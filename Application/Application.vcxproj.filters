@@ -54,6 +54,15 @@
     <ClInclude Include="Window\Direct2D.hpp">
       <Filter>Root\Window</Filter>
     </ClInclude>
+    <ClInclude Include="AppWindow\LogView.hpp">
+      <Filter>Root\AppWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="AppWindow\WidgetView.hpp">
+      <Filter>Root\AppWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="AppWindow\WidgetViewRender.hpp">
+      <Filter>Root\AppWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -85,6 +94,15 @@
     </ClCompile>
     <ClCompile Include="Window\Direct2D.cpp">
       <Filter>Root\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="AppWindow\LogView.cpp">
+      <Filter>Root\AppWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="AppWindow\WidgetView.cpp">
+      <Filter>Root\AppWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="AppWindow\WidgetViewRender.cpp">
+      <Filter>Root\AppWindow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
