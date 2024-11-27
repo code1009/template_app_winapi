@@ -36,7 +36,7 @@ AboutBox::~AboutBox()
 }
 
 //===========================================================================
-LRESULT AboutBox::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -76,34 +76,34 @@ INT_PTR AboutBox::doModal(HWND hWndParent)
 }
 
 //===========================================================================
-LRESULT AboutBox::onInitDialog(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onInitDialog(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	setInformation();
 
 	return TRUE;
 }
 
-LRESULT AboutBox::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onDestroy(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return FALSE;
 }
 
-LRESULT AboutBox::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onClose(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return FALSE;
 }
 
-LRESULT AboutBox::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onSize(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return FALSE;
 }
 
-LRESULT AboutBox::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onEraseBkGnd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return FALSE;
 }
 
-LRESULT AboutBox::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 #if 0
 	PAINTSTRUCT ps;	
@@ -127,7 +127,7 @@ LRESULT AboutBox::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 	return FALSE;
 }
 
-LRESULT AboutBox::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT AboutBox::onCommand(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	int id = LOWORD(wParam);
 

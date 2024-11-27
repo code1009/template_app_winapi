@@ -20,35 +20,35 @@ public:
 	virtual ~LogListViewCtrl();
 
 public:
-	virtual LRESULT onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam) override;
+	virtual LRESULT onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 
 public:
 	void createWindow(HWND hWndParent);
 	void destroyWindow(void);
 
 public:
-	LRESULT onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onCreate(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onDestroy(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onClose(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onSize(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onEraseBkGnd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onCommand(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-	LRESULT OnNotifyReflect(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnNotifyReflect(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-	LRESULT OnLvnGetDispInfo(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnLvnGetDispInfo(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-	LRESULT OnNmCustomDraw(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT OnPrePaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT OnPostPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT OnPreErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT OnPostErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT OnItemPrePaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT OnItemPostPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT OnItemPreErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT OnItemPostErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT OnSubItemPrePaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnNmCustomDraw(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnPrePaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnPostPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnPreErase(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnPostErase(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnItemPrePaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnItemPostPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnItemPreErase(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnItemPostErase(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT OnSubItemPrePaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 public:
 	void initialize(void);
@@ -72,21 +72,21 @@ public:
 	virtual ~LogView();
 
 public:
-	virtual LRESULT onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam) override;
+	virtual LRESULT onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 
 public:
 	void createWindow(HWND hWndParent);
 	void destroyWindow(void);
 
 public:
-	LRESULT onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onNotify(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onCreate(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onDestroy(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onClose(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onSize(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onEraseBkGnd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onCommand(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onNotify(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 };
 
 

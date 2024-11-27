@@ -35,9 +35,9 @@ public:
 	void UpdateLayout(HWND hWnd, HWND hFirstWnd, HWND hSecondWnd);
 
 public:
-	void onLButtonDown(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	void onLButtonUp(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	void onMouseMove(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	void onLButtonDown(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	void onLButtonUp(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	void onMouseMove(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 };
 
 
@@ -64,9 +64,9 @@ public:
 	void UpdateLayout(HWND hWnd, HWND hFirstWnd, HWND hSecondWnd);
 
 public:
-	void onLButtonDown(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	void onLButtonUp(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	void onMouseMove(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	void onLButtonDown(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	void onLButtonUp(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	void onMouseMove(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 };
 
 

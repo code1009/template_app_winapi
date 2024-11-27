@@ -25,27 +25,27 @@ public:
 	virtual ~MainFrame();
 
 public:
-	virtual LRESULT onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam) override;
+	virtual LRESULT onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 
 public:
 	void createWindow(void);
 	void destroyWindow(void);
 
 public:
-	LRESULT onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-	LRESULT onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onCreate(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onDestroy(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onClose(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onSize(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onEraseBkGnd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onCommand(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	void onCommand_App_About(void);
 	void onCommand_App_Exit(void);
-	LRESULT onNotify(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onNotify(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-	LRESULT onTimer(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onTimer(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-	LRESULT onUser0(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT onUser0(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 public:
 	void onIdle(void);

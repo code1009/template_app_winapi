@@ -50,7 +50,7 @@ WidgetToolView::~WidgetToolView()
 }
 
 //===========================================================================
-LRESULT WidgetToolView::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolView::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -122,32 +122,32 @@ void WidgetToolView::destroyWindow(void)
 }
 
 //===========================================================================
-LRESULT WidgetToolView::onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolView::onCreate(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetToolView::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolView::onDestroy(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetToolView::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolView::onClose(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetToolView::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolView::onSize(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetToolView::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolView::onEraseBkGnd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetToolView::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolView::onPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	PAINTSTRUCT ps;
 	HDC hdc;
@@ -167,13 +167,13 @@ LRESULT WidgetToolView::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM 
 	return 0;
 }
 
-LRESULT WidgetToolView::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolView::onCommand(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
 //===========================================================================
-LRESULT WidgetToolView::OnNotifyReflect(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolView::OnNotifyReflect(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 #if 0
 	NMHDR* hdr = reinterpret_cast<NMHDR*>(lParam);
@@ -242,7 +242,7 @@ WidgetToolFrame::~WidgetToolFrame()
 }
 
 //===========================================================================
-LRESULT WidgetToolFrame::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolFrame::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -378,12 +378,12 @@ void WidgetToolFrame::destroyWindow(void)
 }
 
 //===========================================================================
-LRESULT WidgetToolFrame::onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolFrame::onCreate(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetToolFrame::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolFrame::onDestroy(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (::IsWindow(_hWndParent))
 	{
@@ -393,12 +393,12 @@ LRESULT WidgetToolFrame::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPAR
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetToolFrame::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolFrame::onClose(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetToolFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolFrame::onSize(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	//-----------------------------------------------------------------------
 	RECT rect;
@@ -425,12 +425,12 @@ LRESULT WidgetToolFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM 
 	return 0;
 }
 
-LRESULT WidgetToolFrame::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolFrame::onEraseBkGnd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetToolFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolFrame::onPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 #if 0
 	PAINTSTRUCT ps;
@@ -453,12 +453,12 @@ LRESULT WidgetToolFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetToolFrame::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolFrame::onCommand(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetToolFrame::onNotify(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetToolFrame::onNotify(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	NMHDR* hdr = reinterpret_cast<NMHDR*>(lParam);
 

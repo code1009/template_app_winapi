@@ -74,7 +74,7 @@ MainFrame::~MainFrame()
 }
 
 //===========================================================================
-LRESULT MainFrame::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -158,14 +158,14 @@ void MainFrame::destroyWindow(void)
 }
 
 //===========================================================================
-LRESULT MainFrame::onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onCreate(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	::SetTimer(hWnd, MainFrame_Timer_ID, MainFrame_Timer_Time, nullptr);
 
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainFrame::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onDestroy(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	::KillTimer(hWnd, MainFrame_Timer_ID);
 
@@ -175,7 +175,7 @@ LRESULT MainFrame::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPa
 	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainFrame::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onClose(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	//destroyWindow();
 
@@ -183,7 +183,7 @@ LRESULT MainFrame::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 }
 
 //===========================================================================
-LRESULT MainFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onSize(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	//-----------------------------------------------------------------------
 	SIZE size { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
@@ -237,14 +237,14 @@ LRESULT MainFrame::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam
 	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainFrame::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onEraseBkGnd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	_Splitter.Draw(hWnd);
 	return TRUE;
 //	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 #if 0
 	PAINTSTRUCT ps;
@@ -296,7 +296,7 @@ LRESULT MainFrame::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 #endif
 }
 
-LRESULT MainFrame::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onCommand(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	int id = LOWORD(wParam);
 
@@ -347,7 +347,7 @@ void MainFrame::onCommand_App_Exit(void)
 	destroyWindow();
 }
 
-LRESULT MainFrame::onNotify(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onNotify(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 #if 0
 	NMHDR* hdr = reinterpret_cast<NMHDR*>(lParam);
@@ -364,7 +364,7 @@ LRESULT MainFrame::onNotify(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPar
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainFrame::onTimer(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onTimer(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	UINT id = (UINT)wParam;
 
@@ -378,7 +378,7 @@ LRESULT MainFrame::onTimer(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT MainFrame::onUser0(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT MainFrame::onUser0(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	std::uint32_t id;
 

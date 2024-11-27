@@ -30,7 +30,7 @@ Window::~Window()
 }
 
 //===========================================================================
-LRESULT Window::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT Window::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
@@ -41,7 +41,7 @@ LRESULT Window::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-LRESULT __stdcall WindowProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT __stdcall WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (WM_NCCREATE == uMsg)
 	{
@@ -82,7 +82,7 @@ LRESULT __stdcall WindowProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPa
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-INT_PTR __stdcall DialogProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR __stdcall DialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (WM_INITDIALOG == uMsg)
 	{

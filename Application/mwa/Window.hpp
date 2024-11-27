@@ -63,7 +63,7 @@ public:
 	Window& operator=(Window&&) = delete;
 
 public:
-	virtual LRESULT onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+	virtual LRESULT onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 };
 
 
@@ -72,8 +72,8 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////
 //===========================================================================
-LRESULT __stdcall WindowProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
-INT_PTR __stdcall DialogProc(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam);
+LRESULT __stdcall WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+INT_PTR __stdcall DialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 
 

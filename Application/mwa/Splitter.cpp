@@ -125,13 +125,13 @@ void VSplitter::UpdateLayout(HWND hWnd, HWND hFirstWnd, HWND hSecondWnd)
 	::MoveWindow(hSecondWnd, 0, first + _Width, cx, second, TRUE);
 }
 
-void VSplitter::onLButtonDown(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+void VSplitter::onLButtonDown(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	SetCapture(hWnd);
 	_OldPos = -1;
 }
 
-void VSplitter::onLButtonUp(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+void VSplitter::onLButtonUp(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (GetCapture() != hWnd)
 	{
@@ -148,7 +148,7 @@ void VSplitter::onLButtonUp(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPar
 	SendMessage(hWnd, WM_SIZE, 0, 0);
 }
 
-void VSplitter::onMouseMove(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+void VSplitter::onMouseMove(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (GetCapture() != hWnd)
 	{
@@ -299,13 +299,13 @@ void HSplitter::UpdateLayout(HWND hWnd, HWND hFirstWnd, HWND hSecondWnd)
 	::MoveWindow(hSecondWnd, first + _Width, 0, second, cy, TRUE);
 }
 
-void HSplitter::onLButtonDown(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+void HSplitter::onLButtonDown(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	SetCapture(hWnd);
 	_OldPos = -1;
 }
 
-void HSplitter::onLButtonUp(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+void HSplitter::onLButtonUp(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (GetCapture() != hWnd)
 	{
@@ -322,7 +322,7 @@ void HSplitter::onLButtonUp(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPar
 	SendMessage(hWnd, WM_SIZE, 0, 0);
 }
 
-void HSplitter::onMouseMove(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+void HSplitter::onMouseMove(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (GetCapture() != hWnd)
 	{

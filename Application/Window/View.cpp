@@ -51,7 +51,7 @@ View::~View()
 }
 
 //===========================================================================
-LRESULT View::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -121,33 +121,33 @@ void View::destroyWindow(void)
 }
 
 //===========================================================================
-LRESULT View::onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onCreate(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT View::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onDestroy(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT View::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onClose(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT View::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onSize(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT View::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onEraseBkGnd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	//return TRUE;
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT View::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	PAINTSTRUCT ps;
 	HDC hdc;
@@ -168,7 +168,7 @@ LRESULT View::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 	//return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT View::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT View::onCommand(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	int id = LOWORD(wParam);
 

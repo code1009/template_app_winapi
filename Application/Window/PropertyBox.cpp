@@ -37,7 +37,7 @@ PropertyBox::~PropertyBox()
 }
 
 //===========================================================================
-LRESULT PropertyBox::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT PropertyBox::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -91,14 +91,14 @@ void PropertyBox::destroyWindow(void)
 }
 
 //===========================================================================
-LRESULT PropertyBox::onInitDialog(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT PropertyBox::onInitDialog(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	mwa::centerWindow(_hWnd);
 
 	return TRUE;
 }
 
-LRESULT PropertyBox::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT PropertyBox::onDestroy(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (::IsWindow(_hWndParent))
 	{
@@ -108,23 +108,23 @@ LRESULT PropertyBox::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM l
 	return FALSE;
 }
 
-LRESULT PropertyBox::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT PropertyBox::onClose(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	destroyWindow();
 	return TRUE;
 }
 
-LRESULT PropertyBox::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT PropertyBox::onSize(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return FALSE;
 }
 
-LRESULT PropertyBox::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT PropertyBox::onEraseBkGnd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return FALSE;
 }
 
-LRESULT PropertyBox::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT PropertyBox::onPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 #if 0
 	PAINTSTRUCT ps;	
@@ -148,7 +148,7 @@ LRESULT PropertyBox::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPa
 	return FALSE;
 }
 
-LRESULT PropertyBox::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT PropertyBox::onCommand(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	int id = LOWORD(wParam);
 

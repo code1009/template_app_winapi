@@ -58,7 +58,7 @@ WidgetView::~WidgetView()
 }
 
 //===========================================================================
-LRESULT WidgetView::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -139,22 +139,22 @@ void WidgetView::destroyWindow(void)
 }
 
 //===========================================================================
-LRESULT WidgetView::onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::onCreate(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetView::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::onDestroy(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetView::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::onClose(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetView::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::onSize(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	//-----------------------------------------------------------------------
 	RECT rect;
@@ -181,12 +181,12 @@ LRESULT WidgetView::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPara
 	return 0;
 }
 
-LRESULT WidgetView::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::onEraseBkGnd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetView::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::onPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	//-----------------------------------------------------------------------
 	if (_Window.get())
@@ -203,13 +203,13 @@ LRESULT WidgetView::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lPar
 	return 0;
 }
 
-LRESULT WidgetView::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::onCommand(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
 //===========================================================================
-LRESULT WidgetView::OnHScroll(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::OnHScroll(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	UINT nSBCode = (int)LOWORD(wParam);
 	UINT nPos = (short)(HIWORD(wParam));
@@ -221,7 +221,7 @@ LRESULT WidgetView::OnHScroll(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lP
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetView::OnVScroll(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::OnVScroll(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	UINT nSBCode = (int)LOWORD(wParam);
 	UINT nPos = (short)(HIWORD(wParam));
@@ -235,7 +235,7 @@ LRESULT WidgetView::OnVScroll(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lP
 }
 
 //===========================================================================
-LRESULT WidgetView::OnMouseWheel(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::OnMouseWheel(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	UINT  nFlags = (UINT)LOWORD(wParam);
 	short zDelta = (short)HIWORD(wParam);
@@ -297,7 +297,7 @@ LRESULT WidgetView::OnMouseWheel(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT WidgetView::OnMouseMove(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT WidgetView::OnMouseMove(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	int x = GET_X_LPARAM(lParam);
 	int y = GET_Y_LPARAM(lParam);

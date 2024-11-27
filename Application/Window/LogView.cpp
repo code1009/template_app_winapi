@@ -29,7 +29,7 @@ LogListViewCtrl::~LogListViewCtrl()
 }
 
 //===========================================================================
-LRESULT LogListViewCtrl::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -143,43 +143,43 @@ void LogListViewCtrl::destroyWindow(void)
 }
 
 //===========================================================================
-LRESULT LogListViewCtrl::onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::onCreate(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::CallWindowProcW(_PrevWindowProc, hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT LogListViewCtrl::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::onDestroy(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::CallWindowProcW(_PrevWindowProc, hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT LogListViewCtrl::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::onClose(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::CallWindowProcW(_PrevWindowProc, hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT LogListViewCtrl::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::onSize(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::CallWindowProcW(_PrevWindowProc, hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT LogListViewCtrl::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::onEraseBkGnd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::CallWindowProcW(_PrevWindowProc, hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT LogListViewCtrl::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::onPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::CallWindowProcW(_PrevWindowProc, hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT LogListViewCtrl::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::onCommand(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::CallWindowProcW(_PrevWindowProc, hWnd, uMsg, wParam, lParam);
 }
 
 //===========================================================================
-LRESULT LogListViewCtrl::OnNotifyReflect(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::OnNotifyReflect(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	NMHDR* hdr = reinterpret_cast<NMHDR*>(lParam);
 
@@ -199,7 +199,7 @@ LRESULT LogListViewCtrl::OnNotifyReflect(HWND hWnd, uint32_t uMsg, WPARAM wParam
 }
 
 //===========================================================================
-LRESULT LogListViewCtrl::OnLvnGetDispInfo(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::OnLvnGetDispInfo(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	//-----------------------------------------------------------------------
 	LV_DISPINFO* pLvDispInfo = reinterpret_cast<LV_DISPINFO*>(lParam);
@@ -293,7 +293,7 @@ LRESULT LogListViewCtrl::OnLvnGetDispInfo(HWND hWnd, uint32_t uMsg, WPARAM wPara
 }
 
 //===========================================================================
-LRESULT LogListViewCtrl::OnNmCustomDraw(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::OnNmCustomDraw(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	LPNMCUSTOMDRAW NmCustomDraw = reinterpret_cast<LPNMCUSTOMDRAW>(lParam);
 
@@ -318,27 +318,27 @@ LRESULT LogListViewCtrl::OnNmCustomDraw(HWND hWnd, uint32_t uMsg, WPARAM wParam,
 	return ::CallWindowProcW(_PrevWindowProc, hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT LogListViewCtrl::OnPrePaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::OnPrePaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return CDRF_NOTIFYITEMDRAW;
 }
 
-LRESULT LogListViewCtrl::OnPostPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::OnPostPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return CDRF_DODEFAULT;
 }
 
-LRESULT LogListViewCtrl::OnPreErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::OnPreErase(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return CDRF_DODEFAULT;
 }
 
-LRESULT LogListViewCtrl::OnPostErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::OnPostErase(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return CDRF_DODEFAULT;
 }
 
-LRESULT LogListViewCtrl::OnItemPrePaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::OnItemPrePaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	NMLVCUSTOMDRAW* pNmLvCustomDraw = reinterpret_cast<NMLVCUSTOMDRAW*>(lParam);
 
@@ -357,22 +357,22 @@ LRESULT LogListViewCtrl::OnItemPrePaint(HWND hWnd, uint32_t uMsg, WPARAM wParam,
 	return CDRF_DODEFAULT;
 }
 
-LRESULT LogListViewCtrl::OnItemPostPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::OnItemPostPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return CDRF_DODEFAULT;
 }
 
-LRESULT LogListViewCtrl::OnItemPreErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::OnItemPreErase(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return CDRF_DODEFAULT;
 }
 
-LRESULT LogListViewCtrl::OnItemPostErase(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::OnItemPostErase(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return CDRF_DODEFAULT;
 }
 
-LRESULT LogListViewCtrl::OnSubItemPrePaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogListViewCtrl::OnSubItemPrePaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return CDRF_DODEFAULT;
 }
@@ -483,7 +483,7 @@ LogView::~LogView()
 }
 
 //===========================================================================
-LRESULT LogView::onMsg(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogView::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -557,22 +557,22 @@ void LogView::destroyWindow(void)
 }
 
 //===========================================================================
-LRESULT LogView::onCreate(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogView::onCreate(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT LogView::onDestroy(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogView::onDestroy(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT LogView::onClose(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogView::onClose(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT LogView::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogView::onSize(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	//-----------------------------------------------------------------------
 	RECT rect;
@@ -599,12 +599,12 @@ LRESULT LogView::onSize(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-LRESULT LogView::onEraseBkGnd(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogView::onEraseBkGnd(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT LogView::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogView::onPaint(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 #if 0
 	PAINTSTRUCT ps;
@@ -627,12 +627,12 @@ LRESULT LogView::onPaint(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT LogView::onCommand(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogView::onCommand(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	return ::DefWindowProcW(hWnd, uMsg, wParam, lParam);
 }
 
-LRESULT LogView::onNotify(HWND hWnd, uint32_t uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT LogView::onNotify(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	NMHDR* hdr = reinterpret_cast<NMHDR*>(lParam);
 
