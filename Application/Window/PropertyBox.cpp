@@ -32,11 +32,6 @@ PropertyBox::PropertyBox(HWND hWndParent)
 }
 
 //===========================================================================
-PropertyBox::~PropertyBox()
-{
-}
-
-//===========================================================================
 LRESULT PropertyBox::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)

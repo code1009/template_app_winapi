@@ -14,7 +14,7 @@ public:
 	explicit View(HWND hWndParent);
 
 public:
-	virtual ~View();
+	virtual ~View() = default;
 
 public:
 	virtual LRESULT onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;

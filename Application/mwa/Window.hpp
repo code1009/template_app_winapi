@@ -50,10 +50,10 @@ public:
 	HWND _hWnd{ nullptr };
 
 public:
-	Window();
+	Window() = default;
 
 public:
-	virtual ~Window();
+	virtual ~Window() = default;
 
 public:
 	Window(const Window&) = delete;

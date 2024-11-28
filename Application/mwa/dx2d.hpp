@@ -31,7 +31,7 @@ public:
 	ID2D1HwndRenderTarget* _pRenderTarget{ nullptr };
 
 public:
-	dx2d();
+	dx2d() = default;
 
 public:
 	virtual ~dx2d();
@@ -101,7 +101,7 @@ protected:
 	//-----------------------------------------------------------------------
 public:
 	explicit dx2d_window(HWND hWnd);
-	virtual ~dx2d_window();
+	virtual ~dx2d_window() = default;
 
 
 	//-----------------------------------------------------------------------

@@ -17,7 +17,7 @@ public:
 	explicit PropertyBox(HWND hWndParent);
 
 public:
-	virtual ~PropertyBox();
+	virtual ~PropertyBox() = default;
 
 public:
 	virtual LRESULT onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;

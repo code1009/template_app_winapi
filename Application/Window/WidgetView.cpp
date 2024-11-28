@@ -53,11 +53,6 @@ WidgetView::WidgetView(HWND hWndParent)
 }
 
 //===========================================================================
-WidgetView::~WidgetView()
-{
-}
-
-//===========================================================================
 LRESULT WidgetView::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)

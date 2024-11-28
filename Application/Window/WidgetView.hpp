@@ -17,7 +17,7 @@ public:
 	explicit WidgetView(HWND hWndParent);
 
 public:
-	virtual ~WidgetView();
+	virtual ~WidgetView() = default;
 
 public:
 	virtual LRESULT onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;

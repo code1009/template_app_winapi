@@ -30,6 +30,16 @@ public:
 	VSplitter();
 
 public:
+	virtual ~VSplitter() = default;
+
+public:
+	VSplitter(const VSplitter&) = delete;
+	VSplitter& operator=(const VSplitter&) = delete;
+
+	VSplitter(VSplitter&&) = delete;
+	VSplitter& operator=(VSplitter&&) = delete;
+
+public:
 	void Draw(HWND hWnd);
 	void Draw(HWND hWnd, int curPos);
 	void UpdateLayout(HWND hWnd, HWND hFirstWnd, HWND hSecondWnd);
@@ -57,6 +67,16 @@ public:
 
 public:
 	HSplitter();
+
+public:
+	virtual ~HSplitter() = default;
+
+public:
+	HSplitter(const HSplitter&) = delete;
+	HSplitter& operator=(const HSplitter&) = delete;
+
+	HSplitter(HSplitter&&) = delete;
+	HSplitter& operator=(HSplitter&&) = delete;
 
 public:
 	void Draw(HWND hWnd);

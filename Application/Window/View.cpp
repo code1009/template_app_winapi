@@ -46,11 +46,6 @@ View::View(HWND hWndParent)
 }
 
 //===========================================================================
-View::~View()
-{
-}
-
-//===========================================================================
 LRESULT View::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)

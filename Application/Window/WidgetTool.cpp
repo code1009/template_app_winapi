@@ -45,11 +45,6 @@ WidgetToolView::WidgetToolView(HWND hWndParent)
 }
 
 //===========================================================================
-WidgetToolView::~WidgetToolView()
-{
-}
-
-//===========================================================================
 LRESULT WidgetToolView::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
@@ -234,11 +229,6 @@ WidgetToolFrame::WidgetToolFrame(HWND hWndParent)
 	//-----------------------------------------------------------------------
 	::ShowWindow(_hWnd, SW_SHOW);
 	::UpdateWindow(_hWnd);
-}
-
-//===========================================================================
-WidgetToolFrame::~WidgetToolFrame()
-{
 }
 
 //===========================================================================

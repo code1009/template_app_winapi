@@ -24,10 +24,10 @@ private:
 	WNDCLASSEXW _WndClass{ };
 
 public:
-	WindowClass();
+	WindowClass() = default;
 
 public:
-	virtual ~WindowClass();
+	virtual ~WindowClass() = default;
 
 public:
 	WindowClass(const WindowClass&) = delete;

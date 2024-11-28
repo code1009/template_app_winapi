@@ -23,10 +23,10 @@ private:
 	std::vector< std::function<void(void)> > _idleHandlers;
 
 public:
-	MsgLoop();
+	MsgLoop() = default;
 
 public:
-	virtual ~MsgLoop();
+	virtual ~MsgLoop() = default;
 
 public:
 	MsgLoop(const MsgLoop&) = delete;

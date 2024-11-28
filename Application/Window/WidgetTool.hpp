@@ -14,7 +14,7 @@ public:
 	explicit WidgetToolView(HWND hWndParent);
 
 public:
-	virtual ~WidgetToolView();
+	virtual ~WidgetToolView() = default;
 
 public:
 	virtual LRESULT onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
@@ -51,7 +51,7 @@ public:
 
 public:
 	explicit WidgetToolFrame(HWND hWndParent);
-	virtual ~WidgetToolFrame();
+	virtual ~WidgetToolFrame() = default;
 
 public:
 	virtual LRESULT onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;

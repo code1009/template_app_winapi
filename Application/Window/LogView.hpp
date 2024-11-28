@@ -17,7 +17,7 @@ public:
 	explicit LogListViewCtrl(HWND hWndParent);
 
 public:
-	virtual ~LogListViewCtrl();
+	virtual ~LogListViewCtrl() = default;
 
 public:
 	virtual LRESULT onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;
@@ -69,7 +69,7 @@ public:
 
 public:
 	explicit LogView(HWND hWndParent);
-	virtual ~LogView();
+	virtual ~LogView() = default;
 
 public:
 	virtual LRESULT onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;

@@ -24,11 +24,6 @@ LogListViewCtrl::LogListViewCtrl(HWND hWndParent)
 }
 
 //===========================================================================
-LogListViewCtrl::~LogListViewCtrl()
-{
-}
-
-//===========================================================================
 LRESULT LogListViewCtrl::onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
@@ -475,11 +470,6 @@ LogView::LogView(HWND hWndParent)
 	//-----------------------------------------------------------------------
 	::ShowWindow(_hWnd, SW_SHOW);
 	::UpdateWindow(_hWnd);
-}
-
-//===========================================================================
-LogView::~LogView()
-{
 }
 
 //===========================================================================

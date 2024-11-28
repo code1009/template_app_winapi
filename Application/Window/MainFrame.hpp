@@ -22,7 +22,7 @@ public:
 	MainFrame();
 
 public:
-	virtual ~MainFrame();
+	virtual ~MainFrame() = default;
 
 public:
 	virtual LRESULT onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;

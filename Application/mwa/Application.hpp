@@ -24,10 +24,10 @@ public:
 	RuntimeDebug _RuntimeDebug;
 
 public:
-	Application();
+	Application() = default;
 
 public:
-	virtual ~Application();
+	virtual ~Application() = default;
 
 public:
 	Application(const Application&) = delete;

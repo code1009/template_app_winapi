@@ -11,10 +11,10 @@
 class AboutBox : public mwa::Window
 {
 public:
-	AboutBox();
+	AboutBox() = default;
 
 public:
-	virtual ~AboutBox();
+	virtual ~AboutBox() = default;
 
 public:
 	virtual LRESULT onMsg(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) override;

@@ -33,10 +33,17 @@ public:
 #endif
 
 public:
-	RuntimeDebug();
+	RuntimeDebug() = default;
 
 public:
-	virtual ~RuntimeDebug();
+	virtual ~RuntimeDebug() = default;
+
+public:
+	RuntimeDebug(const RuntimeDebug&) = delete;
+	RuntimeDebug& operator=(const RuntimeDebug&) = delete;
+
+	RuntimeDebug(RuntimeDebug&&) = delete;
+	RuntimeDebug& operator=(RuntimeDebug&&) = delete;
 
 public:
 	void enableMemoryCheck(void);
