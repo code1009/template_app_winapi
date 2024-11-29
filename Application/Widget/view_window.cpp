@@ -295,8 +295,8 @@ void view_window::draw(void)
 	matrix =
 		matrix *
 		D2D1::Matrix3x2F::Translation(
-			static_cast<FLOAT>(-_document_viewport_x), 
-			static_cast<FLOAT>(-_document_viewport_y)
+			static_cast<FLOAT>(-(_document_viewport_x*_scale)), 
+			static_cast<FLOAT>(-(_document_viewport_y*_scale))
 		);
 	_pRenderTarget->SetTransform(matrix);
 	
